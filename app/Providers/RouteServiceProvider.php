@@ -15,6 +15,7 @@ class RouteServiceProvider extends ServiceProvider
     protected $namespace = 'App\\Http\\Controllers';
     protected $namespaceAuth = 'App\\Http\\Controllers\\Auth';
     protected $namespaceCliente = 'App\\Http\\Controllers\\Cliente';
+    protected $namespaceUsuario = 'App\\Http\\Controllers\\Usuario';
 
     public function boot()
     {
@@ -38,6 +39,7 @@ class RouteServiceProvider extends ServiceProvider
                 Route::namespace($this->namespaceAuth)->group(base_path('routes/email.php'));
                 Route::namespace($this->namespaceAuth)->group(base_path('routes/password.php'));
                 Route::namespace($this->namespaceCliente)->middleware('api')->group(base_path('routes/cliente.php'));
+                Route::namespace($this->namespaceUsuario)->middleware('api')->group(base_path('routes/usuario.php'));
             }
         );
     }

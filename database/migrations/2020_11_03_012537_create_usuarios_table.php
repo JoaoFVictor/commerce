@@ -17,7 +17,10 @@ return new class extends Migration
             $table->string('codigo_confirmacao', 50)->nullable();
             $table->unique('email', 'categories_email_unique');
             $table->string('telefone');
-            $table->longText('imagem')->nullable();
+            $table->string('plano')->nullable();
+            $table->unsignedBigInteger('imagem_id')->nullable();
+            $table->foreign('imagem_id')->references('id')->on('imagens');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

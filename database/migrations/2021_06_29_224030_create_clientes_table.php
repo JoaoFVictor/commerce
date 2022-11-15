@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('telefone')->nullable();
             $table->string('bairro')->nullable();
             $table->string('rua')->nullable();
-            $table->string('numero')->nullable();
+            $table->string('numero', 10)->nullable();
             $table->string('cpf')->nullable();
             $table->unsignedBigInteger('usuario_id');
             $table->foreign('usuario_id')->references('id')->on('usuarios');
