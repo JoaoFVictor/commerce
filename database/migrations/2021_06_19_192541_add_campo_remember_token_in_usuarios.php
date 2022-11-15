@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCampoRememberTokenInUsuarios extends Migration
+return new class extends Migration
 {
     public function up()
     {
@@ -19,4 +19,4 @@ class AddCampoRememberTokenInUsuarios extends Migration
             $table->dropColumn('remember_token');
         });
     }
-}
+};

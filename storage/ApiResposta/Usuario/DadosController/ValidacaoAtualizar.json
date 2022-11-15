@@ -1,0 +1,30 @@
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "nome": [
+            "O campo nome é obrigatório.",
+            "O campo nome deve ser uma string.",
+            "O campo nome não pode ser superior a 100 caracteres."
+        ],
+        "email": [
+            "O campo email é obrigatório.",
+            "O campo email deve ser uma string.",
+            "O campo email deve ser um endereço de e-mail válido."
+        ],
+        "telefone": [
+            "O campo telefone é obrigatório.",
+            "O campo telefone deve ser uma string.",
+            "O campo telefone tem um formato inválido.",
+            "O campo telefone não pode ser superior a 14 caracteres."
+        ],
+        "plano": [
+            "O campo plano é obrigatório.",
+            "O campo plano deve ser uma string.",
+            "O campo plano não pode ser superior a 50 caracteres."
+        ],
+        "imagem": [
+            "O campo imagem deve ser uma imagem.",
+            "O campo imagem deve ser um arquivo do tipo: jpeg, png, jpg, gif, svg."
+        ]
+    }
+}

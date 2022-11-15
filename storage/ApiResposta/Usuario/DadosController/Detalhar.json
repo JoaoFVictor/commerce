@@ -1,0 +1,11 @@
+{
+    "data": {
+        "id": 37830,
+        "nome": "Pedro Paulo",
+        "email": "lheidenreich@yahoo.com",
+        "status": true,
+        "telefone": "(38)3215-2201",
+        "plano": "Padrão",
+        "imagem": "https://via.placeholder.com/640x480.png/0088bb?text=voluptate"
+    }
+}

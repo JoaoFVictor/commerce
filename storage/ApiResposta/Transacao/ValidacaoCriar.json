@@ -1,0 +1,40 @@
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "valor": [
+            "O campo valor é obrigatório.",
+            "O campo valor deve ser um número."
+        ],
+        "desconto": [
+            "O campo desconto é obrigatório.",
+            "O campo desconto deve ser um número."
+        ],
+        "descricao": [
+            "O campo descricao não pode ser superior a 50 caracteres.",
+            "O campo descricao deve ser uma string."
+        ],
+        "tipo_transacao_id": [
+            "O campo tipo transacao id é obrigatório.",
+            "O campo tipo transacao id deve ser um número inteiro."
+        ],
+        "usuario_id": [
+            "O campo usuario é obrigatório.",
+            "O campo usuario deve ser um número inteiro.",
+            "O campo usuario selecionado é inválido."
+        ],
+        "produtos.0.id": [
+            "O campo produtos.0.id selecionado é inválido.",
+            "O campo produtos.0.id deve ser um número inteiro."
+        ],
+        "produtos.0.valor": [
+            "O campo produtos.0.valor deve ser um número.",
+            "O campo produtos.0.valor deve ser maior ou igual a 0.",
+            "O campo produtos.0.valor é obrigatório."
+        ],
+        "produtos.0.quantidade": [
+            "O campo produtos.0.quantidade deve ser um número inteiro.",
+            "O campo produtos.0.quantidade deve ser maior ou igual a 0.",
+            "O campo produtos.0.quantidade é obrigatório."
+        ]
+    }
+}
