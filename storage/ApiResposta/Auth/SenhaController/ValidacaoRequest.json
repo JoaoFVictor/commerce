@@ -1,0 +1,8 @@
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "email": [
+            "O campo email é obrigatório."
+        ]
+    }
+}

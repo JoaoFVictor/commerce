@@ -1,0 +1,32 @@
+{
+  "message": "The given data was invalid.",
+  "errors": {
+    "nome": [
+      "O campo nome deve ser uma string.",
+      "O campo nome não pode ser superior a 100 caracteres."
+    ],
+    "telefone": [
+      "O campo telefone deve ser uma string.",
+      "O campo telefone não pode ser superior a 13 caracteres.",
+      "O campo telefone não é um telefone com DDD válido."
+    ],
+    "bairro": [
+      "O campo bairro deve ser uma string.",
+      "O campo bairro não pode ser superior a 100 caracteres."
+    ],
+    "rua": [
+      "O campo rua deve ser uma string.",
+      "O campo rua não pode ser superior a 100 caracteres."
+    ],
+    "numero": [
+      "O campo numero deve ser uma string.",
+      "O campo numero não pode ser superior a 10 caracteres."
+    ],
+    "cpf": [
+      "O campo cpf deve ser uma string.",
+      "O campo cpf já está cadastrado neste usuário.",
+      "O campo cpf não é um CPF válido.",
+      "O campo cpf não pode ser superior a 11 caracteres."
+    ]
+  }
+}

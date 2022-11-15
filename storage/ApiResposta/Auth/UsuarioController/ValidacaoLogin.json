@@ -1,0 +1,16 @@
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "email": [
+            "O campo email é obrigatório.",
+            "O campo email selecionado é inválido.",
+            "O campo email não pode ser superior a 100 caracteres.",
+            "Essas credenciais não foram encontradas em nossos registros."
+        ],
+        "senha": [
+            "O campo senha é obrigatório.",
+            "O campo senha deve ter pelo menos 8 caracteres.",
+            "O campo senha não pode ser superior a 20 caracteres."
+        ]
+    }
+}

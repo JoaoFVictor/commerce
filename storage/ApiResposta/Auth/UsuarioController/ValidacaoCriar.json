@@ -1,0 +1,28 @@
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "nome": [
+            "O campo nome é obrigatório.",
+            "O campo nome deve ser uma string.",
+            "O campo nome não pode ser superior a 100 caracteres."
+        ],
+        "email": [
+            "O campo email é obrigatório.",
+            "O campo email deve ser uma string.",
+            "O campo email não pode ser superior a 100 caracteres.",
+            "O campo email deve ser um endereço de e-mail válido.",
+            "O campo email já está sendo utilizado."
+        ],
+        "telefone": [
+            "O campo telefone é obrigatório.",
+            "O campo telefone não é um telefone com DDD válido.",
+            "O campo telefone não pode ser superior a 13 caracteres."
+        ],
+        "senha": [
+            "O campo senha é obrigatório.",
+            "O campo senha deve ser uma string.",
+            "O campo senha deve ter pelo menos 8 caracteres.",
+            "O campo senha não pode ser superior a 20 caracteres."
+        ]
+    }
+}

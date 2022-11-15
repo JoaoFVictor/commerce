@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "id": 5,
+      "nome": "Jefeson Santana",
+      "telefone": "(38)4002-8922",
+      "bairro": "Centro",
+      "rua": "Rua 4",
+      "numero": "14",
+      "cpf": "35543806019"
+    },
+    {
+      "id": 6,
+      "nome": "Francisco Pereira",
+      "telefone": "(21)3221-4821",
+      "bairro": "Alto Pereira",
+      "rua": "Rua Augustinho",
+      "numero": "81",
+      "cpf": "78116008030"
+    }
+  ]
+}

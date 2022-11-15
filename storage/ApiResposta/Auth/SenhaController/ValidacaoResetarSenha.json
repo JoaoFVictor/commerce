@@ -1,0 +1,22 @@
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "email": [
+            "O campo email é obrigatório.",
+            "O campo email deve ser uma string.",
+            "O campo email deve ser um endereço de e-mail válido.",
+            "O campo email não pode ser superior a 100 caracteres."
+        ],
+        "password": [
+            "O campo senha é obrigatório."
+        ],
+        "password_confirmation": [
+            "O campo confirmação da senha é obrigatório.",
+            "O campo senha de confirmação não confere.",
+            "O campo senha deve ter pelo menos 8 caracteres."
+        ],
+        "token": [
+            "O campo token é obrigatório."
+        ]
+    }
+}
