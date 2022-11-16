@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Usuarios;
+namespace App\Http\Resources\Usuario;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -19,7 +19,7 @@ class UsuariosResource extends JsonResource
             'status' => $this->status,
             'telefone' => $this->telefone,
             'plano' => $this->plano,
-            'imagem' => optional($this->imagem)->caminho,
+            'imagem' => $this->imagem?->caminho,
         ];
     }
 }

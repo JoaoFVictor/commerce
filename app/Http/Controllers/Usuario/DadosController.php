@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Usuario;
 
 use App\Actions\Usuario\AtualizarUsuarioAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Usuarios\Atualizar as Request;
-use App\Http\Resources\Usuarios\UsuariosResource as Resource;
+use App\Http\Requests\Usuario\Atualizar as Request;
+use App\Http\Resources\Usuario\UsuariosResource as Resource;
 use Illuminate\Support\Facades\Auth;
 
 class DadosController extends Controller

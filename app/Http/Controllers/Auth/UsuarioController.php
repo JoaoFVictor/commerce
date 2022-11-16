@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Actions\Usuario\AutenticarUsuarioAction;
 use App\Actions\Usuario\CadastrarUsuarioAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Usuarios\UsuarioCriar;
-use App\Http\Requests\Usuarios\UsuarioLogar;
+use App\Http\Requests\Usuario\UsuarioCriar;
+use App\Http\Requests\Usuario\UsuarioLogar;
 
 class UsuarioController extends Controller
 {

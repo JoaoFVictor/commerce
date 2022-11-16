@@ -3,7 +3,7 @@
 namespace App\Actions\Imagem;
 
 use App\Exceptions\ImagemInvalida;
-use App\Http\Requests\Usuarios\Atualizar as Request;
+use App\Http\Requests\Usuario\Atualizar as Request;
 use App\Models\Imagem;
 use App\Repository\Imagem\ImagemRepositoryEloquent;
 use Illuminate\Support\Facades\DB;

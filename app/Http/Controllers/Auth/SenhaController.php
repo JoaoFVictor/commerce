@@ -7,8 +7,8 @@ use App\Actions\Usuario\ResetarSenhaFormularioEmailUsuarioAction;
 use App\Actions\Usuario\ResetarSenhaFormularioUsuarioAction;
 use App\Actions\Usuario\ResetarSenhaUsuarioAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Usuarios\ResetarSenha as ResetarSenhaRequest;
-use App\Http\Requests\Usuarios\UsuarioEmail;
+use App\Http\Requests\Usuario\ResetarSenha as ResetarSenhaRequest;
+use App\Http\Requests\Usuario\UsuarioEmail;
 
 class SenhaController extends Controller
 {

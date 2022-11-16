@@ -3,8 +3,8 @@
 namespace App\Actions\Usuario;
 
 use App\Actions\Imagem\SalvarImagemAction;
-use App\Http\Requests\Usuarios\Atualizar as Request;
-use App\Http\Resources\Usuarios\UsuariosResource;
+use App\Http\Requests\Usuario\Atualizar as Request;
+use App\Http\Resources\Usuario\UsuariosResource;
 use Auth;
 use Illuminate\Http\JsonResponse;
 use Throwable;

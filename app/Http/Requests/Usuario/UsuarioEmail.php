@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Usuarios;
+namespace App\Http\Requests\Usuario;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UsuarioLogar extends FormRequest
+class UsuarioEmail extends FormRequest
 {
     public function authorize()
     {
@@ -14,8 +14,7 @@ class UsuarioLogar extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'string', 'max:100', 'exists:usuarios'],
-            'senha' => ['required', 'string', 'min:8', 'max:20'],
+            'email' => ['required', 'max:50', 'exists:usuarios,email'],
         ];
     }
 
@@ -28,10 +27,6 @@ class UsuarioLogar extends FormRequest
             'email' => [
                 'description' => 'Email do usuário.',
                 'example' => 'email@email.com',
-            ],
-            'senha' => [
-                'description' => 'Senha do usuário.',
-                'example' => 'senha@@',
             ],
         ];
     }
