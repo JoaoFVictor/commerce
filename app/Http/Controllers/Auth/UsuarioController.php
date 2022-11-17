@@ -30,7 +30,7 @@ class UsuarioController extends Controller
         try {
             $action->execute($request->only(['nome', 'senha', 'email', 'telefone']));
 
-            return Response::json(['message' => config('messages.error.server')], HttpFoundationResponse::HTTP_CREATED);
+            return Response::json(['message' => 'Conta criada.'], HttpFoundationResponse::HTTP_CREATED);
         } catch (Exception $ex) {
             Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
 
