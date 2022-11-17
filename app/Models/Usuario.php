@@ -17,11 +17,11 @@ class Usuario extends Authenticatable implements MustVerifyEmail
     use Notifiable;
     use SoftDeletes;
 
-    protected string $table = 'usuarios';
+    protected $table = 'usuarios';
 
-    protected string $primaryKey = 'id';
+    protected $primaryKey = 'id';
 
-    protected array $fillable = [
+    protected $fillable = [
         'nome',
         'email',
         'senha',
@@ -32,12 +32,12 @@ class Usuario extends Authenticatable implements MustVerifyEmail
         'plano',
     ];
 
-    protected array $hidden = [
+    protected $hidden = [
         'senha',
         'codigo_confirmacao',
     ];
 
-    protected array $casts = [
+    protected $casts = [
         'status' => 'boolean',
     ];
 

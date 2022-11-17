@@ -9,11 +9,11 @@ class Imagem extends Model
 {
     use HasFactory;
 
-    protected string $table = 'imagens';
+    protected $table = 'imagens';
 
-    protected string $primaryKey = 'id';
+    protected $primaryKey = 'id';
 
-    protected array $fillable = [
+    protected $fillable = [
         'caminho',
         'descricao',
     ];

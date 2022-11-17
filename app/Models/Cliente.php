@@ -10,11 +10,11 @@ class Cliente extends Model
 {
     use HasFactory;
 
-    protected string $primaryKey = 'id';
+    protected $primaryKey = 'id';
 
-    protected string $table = 'clientes';
+    protected $table = 'clientes';
 
-    protected array $fillable = [
+    protected $fillable = [
         'nome',
         'telefone',
         'bairro',
