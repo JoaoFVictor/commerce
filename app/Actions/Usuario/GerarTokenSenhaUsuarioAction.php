@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Password;
 class GerarTokenSenhaUsuarioAction
 {
     private $usuario;
+
     private $token;
 
     public function execute(string $email): array

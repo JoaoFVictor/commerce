@@ -8,13 +8,13 @@ use Tests\TestCase;
 
 class BuscarNomeTest extends TestCase
 {
-    private const ROTA = 'cliente.buscar.nome';
+    private const ROTA = 'cliente.listar.nome';
 
     public function testFalhaUsuarioNaoLogado()
     {
         $usuario = Usuario::factory()->create();
         $clienteUm = Cliente::factory()->create([
-            'usuario_id' => $usuario->getKey(),
+            'usuario_id' => $usuario->id,
         ]);
 
         $response = $this->getJson(route(self::ROTA, $clienteUm->nome));

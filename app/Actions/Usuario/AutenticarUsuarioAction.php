@@ -6,7 +6,6 @@ use App\Models\Usuario;
 use App\Models\UsuarioToken;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Cache\RateLimiter;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
@@ -15,12 +14,12 @@ use Illuminate\Validation\ValidationException;
 
 class AutenticarUsuarioAction
 {
-    public function execute(Request $request)
+    public function execute(Request $request): string
     {
         if ($this->contemMuitasTentativas($request)) {
             $this->eventoBloqueio($request);
 
-            return $this->enviarMensagemBloqueio($request);
+            $this->enviarMensagemBloqueio($request);
         }
 
         $usuario = Usuario::where('email', $request->input('email'))->first();
@@ -30,16 +29,14 @@ class AutenticarUsuarioAction
 
         $this->incrementarTentativaLogin($request);
 
-        return $this->enviarErroLogin();
+        $this->enviarErroLogin();
     }
 
-    private function enviarSucessoLogin(Request $request, Usuario $usuario): JsonResponse
+    private function enviarSucessoLogin(Request $request, Usuario $usuario): string
     {
         $this->limparTentativasLogin($request);
 
-        $token = $this->tratarToken($usuario);
-
-        return response()->json(['token' => $token]);
+        return $this->tratarToken($usuario);
     }
 
     private function autenticar(Request $request, Usuario $usuario): bool
@@ -53,12 +50,12 @@ class AutenticarUsuarioAction
 
     private function tratarToken(Usuario $usuario): string
     {
-        $usuarioToken = UsuarioToken::where('name', $usuario->getKey())->first();
+        $usuarioToken = UsuarioToken::where('name', $usuario->id)->first();
         if ($usuarioToken) {
             $usuarioToken->delete();
         }
 
-        return $usuario->createToken($usuario->getKey())->plainTextToken;
+        return $usuario->createToken($usuario->id)->plainTextToken;
     }
 
     private function enviarErroLogin(): ValidationException
@@ -78,14 +75,14 @@ class AutenticarUsuarioAction
         $this->limite()->clear($this->chaveRequisicao($request));
     }
 
-    private function enviarMensagemBloqueio(Request $request)
+    private function enviarMensagemBloqueio(Request $request): void
     {
         $segundos = $this->limite()->availableIn(
             $this->chaveRequisicao($request)
         );
 
         throw ValidationException::withMessages([
-            $this->username() => [trans('auth.throttle', [
+            $this->username() => [__('auth.throttle', [
                 'seconds' => $segundos,
                 'minutes' => ceil($segundos / 60),
             ])],

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Cliente;
 
+use App\Repository\Cliente\ClienteRepositoryInterface;
 use App\Rules\ClienteDuplicadoParaUsuario;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -9,7 +10,11 @@ class ClienteAtualizar extends FormRequest
 {
     private const URL_SEGMENTO_CLIENTE_ID = 2;
 
-    public function authorize()
+    public function __construct(private ClienteRepositoryInterface $clienteRepository)
+    {
+    }
+
+    public function authorize(): bool
     {
         return true;
     }
@@ -22,7 +27,7 @@ class ClienteAtualizar extends FormRequest
             'bairro' => ['filled', 'string', 'max:100'],
             'rua' => ['filled', 'string', 'max:100'],
             'numero' => ['filled', 'string', 'max:10'],
-            'cpf' => ['filled', 'max:11', 'cpf', new ClienteDuplicadoParaUsuario($this->segment(self::URL_SEGMENTO_CLIENTE_ID))],
+            'cpf' => ['filled', 'max:11', 'cpf', new ClienteDuplicadoParaUsuario($this->segment(self::URL_SEGMENTO_CLIENTE_ID), $this->clienteRepository)],
         ];
     }
 

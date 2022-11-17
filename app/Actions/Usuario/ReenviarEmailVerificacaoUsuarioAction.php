@@ -2,17 +2,17 @@
 
 namespace App\Actions\Usuario;
 
-use Illuminate\Http\JsonResponse;
+use Auth;
 
 class ReenviarEmailVerificacaoUsuarioAction
 {
-    public function execute(): JsonResponse
+    public function execute(): bool
     {
-        if (auth('sanctum')->user()->hasVerifiedEmail()) {
-            return response()->json(['message' => 'Email já está verificado.']);
+        if (Auth::user()->hasVerifiedEmail()) {
+            return false;
         }
-        auth('sanctum')->user()->sendEmailVerificationNotification();
+        Auth::user()->sendEmailVerificationNotification();
 
-        return response()->json(['message' => 'Email reenviado.']);
+        return true;
     }
 }

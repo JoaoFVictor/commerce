@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Usuarios;
+namespace App\Http\Requests\Usuario;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 class UsuarioEmail extends FormRequest
 {
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }

@@ -4,16 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Cliente extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'id';
+    protected string $primaryKey = 'id';
 
-    protected $table = 'clientes';
+    protected string $table = 'clientes';
 
-    protected $fillable = [
+    protected array $fillable = [
         'nome',
         'telefone',
         'bairro',
@@ -23,7 +24,7 @@ class Cliente extends Model
         'usuario_id',
     ];
 
-    public function usuario()
+    public function usuario(): HasOne
     {
         return $this->hasOne(Usuario::class, 'id', 'usuario_id');
     }

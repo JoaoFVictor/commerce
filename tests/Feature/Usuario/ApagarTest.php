@@ -34,7 +34,7 @@ class ApagarTest extends TestCase
         $response->assertStatus(200);
 
         $this->assertDatabaseMissing('usuarios', [
-            'id' => $this->usuario->getKey(),
+            'id' => $this->usuario->id,
             'deleted_at' => null,
         ]);
     }

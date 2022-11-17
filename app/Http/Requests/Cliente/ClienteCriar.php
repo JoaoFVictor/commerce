@@ -2,20 +2,26 @@
 
 namespace App\Http\Requests\Cliente;
 
+use App\Repository\Cliente\ClienteRepositoryInterface;
 use App\Rules\ClienteDuplicadoParaUsuario;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ClienteCriar extends FormRequest
 {
-    public function authorize()
+    public function __construct(private ClienteRepositoryInterface $clienteRepository)
+    {
+    }
+
+    public function authorize(): bool
     {
         return true;
     }
 
-    protected function prepareForValidation()
+    protected function prepareForValidation(): void
     {
         $this->merge([
-            'usuario_id' => auth('sanctum')->id(),
+            'usuario_id' => Auth::user()->id,
         ]);
     }
 
@@ -27,7 +33,7 @@ class ClienteCriar extends FormRequest
             'bairro' => ['nullable', 'string', 'max:100'],
             'rua' => ['nullable', 'string', 'max:100'],
             'numero' => ['nullable', 'string', 'max:10'],
-            'cpf' => ['nullable', 'string', 'max:11', 'cpf', new ClienteDuplicadoParaUsuario()],
+            'cpf' => ['nullable', 'string', 'max:11', 'cpf', new ClienteDuplicadoParaUsuario(null, $this->clienteRepository)],
             'usuario_id' => ['nullable'],
         ];
     }

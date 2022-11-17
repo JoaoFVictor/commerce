@@ -7,8 +7,15 @@ use App\Actions\Usuario\ResetarSenhaFormularioEmailUsuarioAction;
 use App\Actions\Usuario\ResetarSenhaFormularioUsuarioAction;
 use App\Actions\Usuario\ResetarSenhaUsuarioAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Usuarios\ResetarSenha as ResetarSenhaRequest;
-use App\Http\Requests\Usuarios\UsuarioEmail;
+use App\Http\Requests\Usuario\ResetarSenha as ResetarSenhaRequest;
+use App\Http\Requests\Usuario\UsuarioEmail;
+use Exception;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpFoundation\Response as HttpFoundationResponse;
 
 class SenhaController extends Controller
 {
@@ -21,9 +28,19 @@ class SenhaController extends Controller
      * @responseFile 422 ApiResposta/Auth/SenhaController/ValidacaoRequest.json
      * @response {"message": "Enviamos seu link de redefinição de senha por e-mail!"}
      */
-    public function recuperarSenha(UsuarioEmail $request, RecuperarSenhaUsuarioAction $action)
+    public function recuperarSenha(UsuarioEmail $request, RecuperarSenhaUsuarioAction $action): JsonResponse
     {
-        return $action->execute($request->validated());
+        try {
+            $mensagem = $action->execute($request->validated());
+
+            return Response::json(['message' => $mensagem]);
+        } catch (ValidationException $ex) {
+            return Response::json(['messages' => $ex->getMessage(), 'errors' => $ex->errors()], $ex->status);
+        } catch (Exception $ex) {
+            Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
+
+            return Response::json(['message' => config('messages.error.server')], HttpFoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
@@ -34,24 +51,48 @@ class SenhaController extends Controller
      * @group Password
      * @responseFile 422 ApiResposta/Auth/SenhaController/ValidacaoResetarSenha.json
      */
-    public function resetarSenha(ResetarSenhaRequest $request, ResetarSenhaUsuarioAction $action)
+    public function resetarSenha(ResetarSenhaRequest $request, ResetarSenhaUsuarioAction $action): View|JsonResponse
     {
-        return $action->execute($request->validated());
+        try {
+            $action->execute($request->validated());
+
+            return view('avisos.sucesso')->with(
+                ['titulo' => 'Sucesso', 'texto' => config('messages.mail.reset_password')]
+            );
+        } catch (ValidationException $ex) {
+            return Response::json(['messages' => $ex->getMessage(), 'errors' => $ex->errors()], $ex->status);
+        } catch (Exception $ex) {
+            Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
+
+            return Response::json(['message' => config('messages.error.server')], HttpFoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
      * @hideFromAPIDocumentation
      */
-    public function resetarSenhaFormulario(ResetarSenhaFormularioEmailUsuarioAction $action)
+    public function resetarSenhaFormulario(ResetarSenhaFormularioEmailUsuarioAction $action): View|JsonResponse
     {
-        return $action->execute();
+        try {
+            return $action->execute();
+        } catch (Exception $ex) {
+            Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
+
+            return Response::json(['message' => config('messages.error.server')], HttpFoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
      * @hideFromAPIDocumentation
      */
-    public function requisicaoFormularioResetar(ResetarSenhaRequest $request, ResetarSenhaFormularioUsuarioAction $action)
+    public function requisicaoFormularioResetar(ResetarSenhaRequest $request, ResetarSenhaFormularioUsuarioAction $action): View|JsonResponse
     {
-        return $action->execute($request->route()->parameter('token'), $request->input('email'));
+        try {
+            return $action->execute($request->route()->parameter('token'), $request->input('email'));
+        } catch (Exception $ex) {
+            Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
+
+            return Response::json(['message' => config('messages.error.server')], HttpFoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }

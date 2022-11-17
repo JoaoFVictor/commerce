@@ -9,5 +9,5 @@ class UsuarioToken extends Model
 {
     use HasFactory;
 
-    protected $table = 'personal_access_tokens';
+    protected string $table = 'personal_access_tokens';
 }

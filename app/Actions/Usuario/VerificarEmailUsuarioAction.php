@@ -2,17 +2,21 @@
 
 namespace App\Actions\Usuario;
 
-use App\Models\Usuario;
+use App\Repository\Usuario\UsuarioRepositoryInterface;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\Events\Verified;
 
 class VerificarEmailUsuarioAction
 {
-    public function execute(string $usuarioId, string $hash)
+    public function __construct(private UsuarioRepositoryInterface $usuarioRepository)
     {
-        $usuario = Usuario::find($usuarioId);
+    }
 
-        if (! hash_equals($usuarioId, (string) $usuario->getKey())) {
+    public function execute(string $usuarioId, string $hash): void
+    {
+        $usuario = $this->usuarioRepository->buscar($usuarioId);
+
+        if (! hash_equals($usuarioId, (string) $usuario->id)) {
             throw new AuthorizationException();
         }
 
@@ -23,9 +27,5 @@ class VerificarEmailUsuarioAction
         if ($usuario->markEmailAsVerified()) {
             event(new Verified($usuario));
         }
-
-        return view('avisos.sucesso')->with(
-            ['titulo' => 'Sucesso', 'texto' => config('messages.mail.verify')]
-        );
     }
 }

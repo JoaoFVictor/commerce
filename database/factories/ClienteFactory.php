@@ -19,7 +19,7 @@ class ClienteFactory extends Factory
             'rua' => $this->faker->streetName(),
             'numero' => $this->faker->buildingNumber(),
             'cpf' => '01234567890',
-            'usuario_id' => Usuario::factory()->create()->getKey(),
+            'usuario_id' => Usuario::factory()->create()->id,
         ];
     }
 }

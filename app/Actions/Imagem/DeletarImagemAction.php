@@ -20,6 +20,6 @@ class DeletarImagemAction
     {
         $imagemCaminho = Str::afterLast($imagem->caminho, '/');
         Storage::delete(self::CAMINHO_IMAGEM."/{$imagemCaminho}");
-        $this->imagemRepositoryEloquent->apagar($imagem->getKey());
+        $this->imagemRepositoryEloquent->apagar($imagem->id);
     }
 }

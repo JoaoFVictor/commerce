@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Usuarios;
+namespace App\Http\Resources\Usuario;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -10,16 +10,16 @@ class UsuariosResource extends JsonResource
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
-            'id' => $this->getKey(),
+            'id' => $this->id,
             'nome' => $this->nome,
             'email' => $this->email,
             'status' => $this->status,
             'telefone' => $this->telefone,
             'plano' => $this->plano,
-            'imagem' => optional($this->imagem)->caminho,
+            'imagem' => $this->imagem?->caminho,
         ];
     }
 }

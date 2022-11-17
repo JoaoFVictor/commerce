@@ -3,7 +3,6 @@
 namespace App\Actions\Imagem;
 
 use App\Exceptions\ImagemInvalida;
-use App\Http\Requests\Usuarios\Atualizar as Request;
 use App\Models\Imagem;
 use App\Repository\Imagem\ImagemRepositoryEloquent;
 use Illuminate\Support\Facades\DB;
@@ -18,15 +17,15 @@ class SalvarImagemAction
     ) {
     }
 
-    public function execute(Request $request): Imagem
+    public function execute(array $dados): Imagem
     {
-        $imagem = DB::transaction(function () use ($request) {
-            if ($request->file('imagem')->isValid()) {
-                $imagemCaminho = $request->file('imagem')->store(self::CAMINHO_IMAGEM);
+        $imagem = DB::transaction(function () use ($dados) {
+            if ($dados['imagem']?->isValid()) {
+                $imagemCaminho = $dados['imagem']->store(self::CAMINHO_IMAGEM);
 
                 return $this->imagemRepositoryEloquent->criar(
                     asset(Storage::url($imagemCaminho)),
-                    $request->input('descricao', 'Sem descrição')
+                    $dados['descricao'] ?? 'Sem descrição'
                 );
             } else {
                 throw ImagemInvalida::uploadErro();
