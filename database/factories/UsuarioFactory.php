@@ -22,7 +22,7 @@ class UsuarioFactory extends Factory
             'telefone' => '(38)3215-2201',
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
-            'imagem_id' => Imagem::factory()->create()->getKey(),
+            'imagem_id' => Imagem::factory()->create()->id,
             'plano' => 'Padrão',
         ];
     }

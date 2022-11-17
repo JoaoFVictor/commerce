@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UsuarioLogar extends FormRequest
 {
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }

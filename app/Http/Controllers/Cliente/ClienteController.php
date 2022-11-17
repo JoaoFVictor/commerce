@@ -7,9 +7,20 @@ use App\Http\Requests\Cliente\ClienteAtualizar;
 use App\Http\Requests\Cliente\ClienteCriar;
 use App\Http\Resources\Cliente\ClienteResource;
 use App\Models\Cliente;
+use App\Repository\Cliente\ClienteRepositoryInterface;
+use Exception;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response as HttpFoundationResponse;
 
 class ClienteController extends Controller
 {
+    public function __construct(private ClienteRepositoryInterface $clienteRepository)
+    {
+    }
+
     /**
      * Listagem de Clientes
      *
@@ -18,9 +29,17 @@ class ClienteController extends Controller
      * @group Clientes
      * @responseFile 201 ApiResposta/ClienteController/Listar.json
      */
-    public function index()
+    public function index(): JsonResource|JsonResponse
     {
-        return ClienteResource::collection(Cliente::simplePaginate(15));
+        try {
+            $clientes = $this->clienteRepository->paginar();
+
+            return ClienteResource::collection($clientes);
+        } catch (Exception $ex) {
+            Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
+
+            return Response::json(['message' => config('messages.error.server')], HttpFoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
@@ -32,11 +51,17 @@ class ClienteController extends Controller
      * @responseFile 201 ApiResposta/ClienteController/Criar.json
      * @responseFile 422 ApiResposta/ClienteController/ValidacaoCriar.json
      */
-    public function store(ClienteCriar $request)
+    public function store(ClienteCriar $request): JsonResource|JsonResponse
     {
-        $novo = Cliente::create($request->validated());
+        try {
+            $novo = $this->clienteRepository->criar($request->validated());
 
-        return (new ClienteResource($novo))->response()->setStatusCode(201);
+            return (new ClienteResource($novo))->response()->setStatusCode(201);
+        } catch (Exception $ex) {
+            Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
+
+            return Response::json(['message' => config('messages.error.server')], HttpFoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
@@ -49,9 +74,15 @@ class ClienteController extends Controller
      * @responseFile ApiResposta/ClienteController/Buscar.json
      * @response 404 {"message": "No query results for model [App\\Models\\Cliente]"}
      */
-    public function show(Cliente $cliente)
+    public function show(Cliente $cliente): JsonResource|JsonResponse
     {
-        return new ClienteResource($cliente);
+        try {
+            return new ClienteResource($cliente);
+        } catch (Exception $ex) {
+            Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
+
+            return Response::json(['message' => config('messages.error.server')], HttpFoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
@@ -64,11 +95,17 @@ class ClienteController extends Controller
      * @responseFile ApiResposta/ClienteController/BuscarPeloNome.json
      * @response 404 {"message": "No query results for model [App\\Models\\Cliente]"}
      */
-    public function buscarPeloNome(string $nome)
+    public function ListarPeloNome(string $nome): JsonResource|JsonResponse
     {
-        $clientes = Cliente::where('nome', 'ILIKE', "%{$nome}%")->get();
+        try {
+            $clientes = $this->clienteRepository->ListarPeloNome($nome);
 
-        return ClienteResource::collection($clientes);
+            return ClienteResource::collection($clientes);
+        } catch (Exception $ex) {
+            Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
+
+            return Response::json(['message' => config('messages.error.server')], HttpFoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
@@ -82,11 +119,17 @@ class ClienteController extends Controller
      * @responseFile 422 ApiResposta/ClienteController/ValidacaoAtualizar.json
      * @response 404 {"message": "No query results for model [App\\Models\\Cliente]"}
      */
-    public function update(ClienteAtualizar $request, Cliente $cliente)
+    public function update(ClienteAtualizar $request, Cliente $cliente): JsonResource|JsonResponse
     {
-        $cliente->update($request->validated());
+        try {
+            $clienteAtualizado = $this->clienteRepository->atualizar($cliente->id, $request->validated());
 
-        return new ClienteResource($cliente);
+            return new ClienteResource($clienteAtualizado);
+        } catch (Exception $ex) {
+            Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
+
+            return Response::json(['message' => config('messages.error.server')], HttpFoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
@@ -99,10 +142,16 @@ class ClienteController extends Controller
      * @response 200 {"message": "OK"}
      * @response 404 {"message": "No query results for model [App\\Models\\Cliente]"}
      */
-    public function destroy(Cliente $cliente)
+    public function destroy(Cliente $cliente): JsonResponse
     {
-        $cliente->delete();
+        try {
+            $this->clienteRepository->apagar($cliente->id);
 
-        return response()->json(['message' => 'Cliente excluído com sucesso.']);
+            return response()->json(['message' => 'Cliente excluído com sucesso.']);
+        } catch (Exception $ex) {
+            Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
+
+            return Response::json(['message' => config('messages.error.server')], HttpFoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }

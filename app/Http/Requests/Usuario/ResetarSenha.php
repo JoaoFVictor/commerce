@@ -7,7 +7,7 @@ use Illuminate\Validation\Rules\Password;
 
 class ResetarSenha extends FormRequest
 {
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }

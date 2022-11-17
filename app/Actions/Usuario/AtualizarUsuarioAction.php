@@ -3,31 +3,26 @@
 namespace App\Actions\Usuario;
 
 use App\Actions\Imagem\SalvarImagemAction;
-use App\Http\Requests\Usuario\Atualizar as Request;
-use App\Http\Resources\Usuario\UsuariosResource;
-use Auth;
-use Illuminate\Http\JsonResponse;
-use Throwable;
+use App\Models\Usuario;
+use App\Repository\Usuario\UsuarioRepositoryInterface;
 
 class AtualizarUsuarioAction
 {
-    public function execute(Request $request): JsonResponse|UsuariosResource
+    public function __construct(private SalvarImagemAction $salvarImagemAction, private UsuarioRepositoryInterface $usuarioRepository)
     {
-        $usuario = Auth::user();
-        $novaImagem = null;
-        $dados = $request->validated();
+        $this->salvarImagemAction = $salvarImagemAction;
+        $this->usuarioRepository = $usuarioRepository;
+    }
 
-        if ($request->file('imagem')?->isValid()) {
-            try {
-                $novaImagem = app(SalvarImagemAction::class)->execute($request);
-                $dados['imagem_id'] = $novaImagem->getKey();
-            } catch (Throwable $exception) {
-                return response()->json(['message' => $exception->getMessage()], $exception->getCode());
-            }
+    public function execute(int $usuarioId, array $dados): Usuario
+    {
+        $novaImagem = null;
+
+        if ($dados['imagem']?->isValid()) {
+            $novaImagem = $this->salvarImagemAction->execute($dados);
+            $dados['imagem_id'] = $novaImagem->id;
         }
 
-        $usuario->update($dados);
-
-        return new UsuariosResource($usuario);
+        return $this->usuarioRepository->atualizar($usuarioId, $dados);
     }
 }

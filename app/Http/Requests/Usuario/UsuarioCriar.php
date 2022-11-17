@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Hash;
 
 class UsuarioCriar extends FormRequest
 {
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
 
-    public function passedValidation()
+    public function passedValidation(): void
     {
         $this->merge([
             'senha' => Hash::make($this->input('senha')),

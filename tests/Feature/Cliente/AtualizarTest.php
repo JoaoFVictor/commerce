@@ -14,10 +14,10 @@ class AtualizarTest extends TestCase
     {
         $usuario = Usuario::factory()->create();
         $clienteUm = Cliente::factory()->create([
-            'usuario_id' => $usuario->getKey(),
+            'usuario_id' => $usuario->id,
         ]);
 
-        $response = $this->putJson(route(self::ROTA, $clienteUm->getKey()));
+        $response = $this->putJson(route(self::ROTA, $clienteUm->id));
 
         $response->assertStatus(401)
             ->assertJsonStructure([
@@ -29,7 +29,7 @@ class AtualizarTest extends TestCase
     {
         $usuario = Usuario::factory()->create();
         $clienteRegistrado = Cliente::factory()->create([
-            'usuario_id' => $usuario->getKey(),
+            'usuario_id' => $usuario->id,
         ]);
 
         $valoresGrandes = str_pad('', 101, 'A');
@@ -43,7 +43,7 @@ class AtualizarTest extends TestCase
             'cpf' => $valoresGrandes,
         ];
 
-        $response = $this->actingAs($usuario)->putJson(route(self::ROTA, $clienteRegistrado->getKey()), $dadosIncorretos);
+        $response = $this->actingAs($usuario)->putJson(route(self::ROTA, $clienteRegistrado->id), $dadosIncorretos);
 
         $response->assertStatus(422)
             ->assertJsonStructure([
@@ -76,7 +76,7 @@ class AtualizarTest extends TestCase
     {
         $usuario = Usuario::factory()->create();
         $clienteRegistrado = Cliente::factory()->create([
-            'usuario_id' => $usuario->getKey(),
+            'usuario_id' => $usuario->id,
         ]);
 
         $dadosIncorretos = [
@@ -88,7 +88,7 @@ class AtualizarTest extends TestCase
             'cpf' => 13,
         ];
 
-        $response = $this->actingAs($usuario)->putJson(route(self::ROTA, $clienteRegistrado->getKey()), $dadosIncorretos);
+        $response = $this->actingAs($usuario)->putJson(route(self::ROTA, $clienteRegistrado->id), $dadosIncorretos);
 
         $response->assertStatus(422)
             ->assertJsonStructure([
@@ -108,18 +108,18 @@ class AtualizarTest extends TestCase
     {
         $usuario = Usuario::factory()->create();
         $clienteUm = Cliente::factory()->create([
-            'usuario_id' => $usuario->getKey(),
+            'usuario_id' => $usuario->id,
         ]);
         $clienteDois = Cliente::factory()->create([
             'cpf' => '46021295013',
-            'usuario_id' => $usuario->getKey(),
+            'usuario_id' => $usuario->id,
         ]);
 
         $dadosIncorretos = [
             'cpf' => $clienteUm->cpf,
         ];
 
-        $response = $this->actingAs($usuario)->putJson(route(self::ROTA, $clienteDois->getKey()), $dadosIncorretos);
+        $response = $this->actingAs($usuario)->putJson(route(self::ROTA, $clienteDois->id), $dadosIncorretos);
 
         $response->assertStatus(422)
             ->assertJsonStructure([
@@ -134,14 +134,14 @@ class AtualizarTest extends TestCase
     {
         $usuario = Usuario::factory()->create();
         $cliente = Cliente::factory()->create([
-            'usuario_id' => $usuario->getKey(),
+            'usuario_id' => $usuario->id,
         ]);
 
         $dadosIncorretos = [
             'cpf' => '11111111111',
         ];
 
-        $response = $this->actingAs($usuario)->putJson(route(self::ROTA, $cliente->getKey()), $dadosIncorretos);
+        $response = $this->actingAs($usuario)->putJson(route(self::ROTA, $cliente->id), $dadosIncorretos);
 
         $response->assertStatus(422)
             ->assertJsonStructure([
@@ -156,14 +156,14 @@ class AtualizarTest extends TestCase
     {
         $usuario = Usuario::factory()->create();
         $cliente = Cliente::factory()->create([
-            'usuario_id' => $usuario->getKey(),
+            'usuario_id' => $usuario->id,
         ]);
 
         $dadosIncorretos = [
             'telefone' => '3832152201',
         ];
 
-        $response = $this->actingAs($usuario)->putJson(route(self::ROTA, $cliente->getKey()), $dadosIncorretos);
+        $response = $this->actingAs($usuario)->putJson(route(self::ROTA, $cliente->id), $dadosIncorretos);
 
         $response->assertStatus(422)
             ->assertJsonStructure([
@@ -179,7 +179,7 @@ class AtualizarTest extends TestCase
         $usuario = Usuario::factory()->create();
         $clienteNovo = Cliente::factory()->create();
 
-        $response = $this->actingAs($usuario)->putJson(route(self::ROTA, $clienteNovo->getKey()));
+        $response = $this->actingAs($usuario)->putJson(route(self::ROTA, $clienteNovo->id));
 
         $response->assertStatus(200)
             ->assertJsonStructure([

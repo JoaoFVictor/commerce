@@ -2,37 +2,29 @@
 
 namespace App\Rules;
 
-use App\Models\Cliente;
+use App\Repository\Cliente\ClienteRepositoryInterface;
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class ClienteDuplicadoParaUsuario implements Rule
 {
     private string $nomeCampo;
 
-    private ?int $cliente;
-
-    public function __construct(?int $cliente = null)
+    public function __construct(private ?int $cliente, private ClienteRepositoryInterface $clienteRepository)
     {
         $this->cliente = $cliente;
     }
 
-    public function passes($nomeCampo, $valor)
+    public function passes($nomeCampo, $valor): bool
     {
         $this->nomeCampo = $nomeCampo;
-        $clienteCadastrado = Cliente::where('cpf', $valor)
-            ->where('usuario_id', auth('sanctum')->user()->getAuthIdentifier());
+        $usuarioId = Auth::user()->id;
+        $clienteCadastrado = $this->clienteRepository->isClienteCpfCadastradoComUsuario($valor, $usuarioId, $this->cliente);
 
-        if (is_int($this->cliente)) {
-            $clienteCadastrado = $clienteCadastrado->where('id', '!=', $this->cliente);
-        }
-        if ($clienteCadastrado->exists()) {
-            return false;
-        }
-
-        return true;
+        return ! $clienteCadastrado;
     }
 
-    public function message()
+    public function message(): string
     {
         return "O campo {$this->nomeCampo} já está cadastrado neste usuário.";
     }

@@ -10,10 +10,10 @@ class ClienteResource extends JsonResource
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
         return [
-            'id' => $this->getKey(),
+            'id' => $this->id,
             'nome' => $this->nome,
             'telefone' => $this->telefone,
             'bairro' => $this->bairro,

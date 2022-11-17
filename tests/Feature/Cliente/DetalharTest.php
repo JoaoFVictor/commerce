@@ -14,10 +14,10 @@ class DetalharTest extends TestCase
     {
         $usuario = Usuario::factory()->create();
         $clienteUm = Cliente::factory()->create([
-            'usuario_id' => $usuario->getKey(),
+            'usuario_id' => $usuario->id,
         ]);
 
-        $response = $this->getJson(route(self::ROTA, $clienteUm->getKey()));
+        $response = $this->getJson(route(self::ROTA, $clienteUm->id));
 
         $response->assertStatus(401)
             ->assertJsonStructure([
@@ -43,7 +43,7 @@ class DetalharTest extends TestCase
         $usuario = Usuario::factory()->create();
         $clienteNovo = Cliente::factory()->create();
 
-        $response = $this->actingAs($usuario)->getJson(route(self::ROTA, $clienteNovo->getKey()));
+        $response = $this->actingAs($usuario)->getJson(route(self::ROTA, $clienteNovo->id));
 
         $response->assertStatus(200)
             ->assertJsonStructure([

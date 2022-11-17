@@ -99,10 +99,10 @@ class CriarTest extends TestCase
     {
         $usuario = Usuario::factory()->create();
         Cliente::factory()->create([
-            'usuario_id' => $usuario->getKey(),
+            'usuario_id' => $usuario->id,
         ]);
         $clienteNovo = Cliente::factory()->make([
-            'usuario_id' => $usuario->getKey(),
+            'usuario_id' => $usuario->id,
         ]);
 
         $response = $this->actingAs($usuario)->postJson(route(self::ROTA), $clienteNovo->toArray());

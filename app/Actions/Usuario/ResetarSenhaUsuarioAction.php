@@ -5,7 +5,6 @@ namespace App\Actions\Usuario;
 use App\Models\Usuario;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Auth\Passwords\PasswordBroker;
-use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
@@ -13,13 +12,15 @@ use Illuminate\Validation\ValidationException;
 
 class ResetarSenhaUsuarioAction
 {
-    public function execute(array $dados): View
+    public function execute(array $dados): void
     {
-        $response = $this->broker()->reset($dados, function ($user, $password) {
+        $resposta = $this->broker()->reset($dados, function ($user, $password) {
             $this->resetarSenha($user, $password);
         });
 
-        return $response == Password::PASSWORD_RESET ? $this->enviarRespostaSucesso($response) : $this->enviarRespostaErro($response);
+        if ($resposta != Password::PASSWORD_RESET) {
+            $this->enviarRespostaErro($resposta);
+        }
     }
 
     private function resetarSenha(Usuario $user, string $password): void
@@ -31,16 +32,9 @@ class ResetarSenhaUsuarioAction
         event(new PasswordReset($user));
     }
 
-    private function enviarRespostaSucesso()
+    private function enviarRespostaErro($resposta): void
     {
-        return view('avisos.sucesso')->with(
-            ['titulo' => 'Sucesso', 'texto' => config('messages.mail.reset_password')]
-        );
-    }
-
-    private function enviarRespostaErro($response): void
-    {
-        throw ValidationException::withMessages(['email' => [trans($response)]]);
+        throw ValidationException::withMessages(['email' => [__($resposta)]]);
     }
 
     private function broker(): PasswordBroker
