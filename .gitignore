@@ -18,3 +18,5 @@ yarn-error.log
 /.vscode
 .gitignore
 laradock/
+_ide_helper.php
+.phpstorm.meta.php
