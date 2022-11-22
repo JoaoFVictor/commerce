@@ -3,6 +3,7 @@
 namespace Tests\Feature\Email;
 
 use App\Models\Usuario;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class ReenviarTest extends TestCase
@@ -13,7 +14,7 @@ class ReenviarTest extends TestCase
     {
         $response = $this->postJson(route(self::ROTA));
 
-        $response->assertStatus(401)
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED)
             ->assertJsonStructure([
                 'message',
             ]);
@@ -26,7 +27,7 @@ class ReenviarTest extends TestCase
         $response = $this->actingAs($usuario)
             ->postJson(route(self::ROTA));
 
-        $response->assertStatus(200)
+        $response->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure([
                 'message',
             ]);

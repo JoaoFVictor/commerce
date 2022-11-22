@@ -5,6 +5,7 @@ namespace Tests\Feature\Produto;
 use App\Models\Estoque;
 use App\Models\Produto;
 use App\Models\Usuario;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class AtualizarTest extends TestCase
@@ -25,7 +26,7 @@ class AtualizarTest extends TestCase
 
         $response = $this->putJson(route(self::ROTA, $produto->getKey()));
 
-        $response->assertStatus(401)
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED)
             ->assertJson([
                 'message' => 'Unauthenticated.',
             ]);
@@ -48,7 +49,7 @@ class AtualizarTest extends TestCase
 
         $response = $this->actingAs($this->usuario)->putJson(route(self::ROTA, $produto->getKey()), $dadosIncorretos);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJson([
                 'errors' => [
                     'codigo_barras' => ['O campo codigo barras não pode ser superior a 128 caracteres.'],
@@ -65,7 +66,7 @@ class AtualizarTest extends TestCase
 
         $response = $this->actingAs($this->usuario2)->putJson(route(self::ROTA, $produto->getKey()));
 
-        $response->assertStatus(403)
+        $response->assertStatus(Response::HTTP_FORBIDDEN)
             ->assertJson([
                 'message' => 'Você não tem permissão nesse produto!',
             ]);
@@ -80,7 +81,7 @@ class AtualizarTest extends TestCase
 
         $response = $this->actingAs($this->usuario)->putJson(route(self::ROTA, $idInvalido));
 
-        $response->assertStatus(404)
+        $response->assertStatus(Response::HTTP_NOT_FOUND)
             ->assertJson([
                 'message' => 'Produto não encontrado!',
             ]);
@@ -101,7 +102,7 @@ class AtualizarTest extends TestCase
 
         $response = $this->actingAs($this->usuario)->putJson(route(self::ROTA, $produto->getKey()), $dadosIncorretos);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJson([
                 'errors' => [
                     'codigo_barras' => ['O campo codigo barras deve ser uma string.'],
@@ -122,7 +123,7 @@ class AtualizarTest extends TestCase
 
         $response = $this->actingAs($this->usuario)->putJson(route(self::ROTA, $produto->getKey()), $novosDadosIncorreto);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJson([
                 'errors' => [
                     'codigo_barras' => ["Um produto possui um código de barras em uso. Produto: {$produto2['nome']}"],
@@ -136,7 +137,7 @@ class AtualizarTest extends TestCase
         Estoque::factory()->create(['produto_id' => $produto->getKey()]);
         $response = $this->actingAs($this->usuario)->putJson(route(self::ROTA, $produto->getKey()));
 
-        $response->assertStatus(200)
+        $response->assertStatus(Response::HTTP_OK)
             ->assertJson([
                 'data' => [
                     'codigo_barras' => $produto->codigo_barras,

@@ -3,6 +3,7 @@
 namespace Tests\Feature\Cliente;
 
 use App\Models\Usuario;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class ListarTest extends TestCase
@@ -13,7 +14,7 @@ class ListarTest extends TestCase
     {
         $response = $this->getJson(route(self::ROTA));
 
-        $response->assertStatus(401)
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED)
             ->assertJsonStructure([
                 'message',
             ]);
@@ -25,7 +26,7 @@ class ListarTest extends TestCase
 
         $response = $this->actingAs($usuario)->getJson(route(self::ROTA));
 
-        $response->assertStatus(200)
+        $response->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure([
                 'data' => [
                     '*' => [

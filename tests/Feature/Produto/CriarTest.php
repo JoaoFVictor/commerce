@@ -4,6 +4,7 @@ namespace Tests\Feature\Produto;
 
 use App\Models\Produto;
 use App\Models\Usuario;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class CriarTest extends TestCase
@@ -22,7 +23,7 @@ class CriarTest extends TestCase
     {
         $response = $this->postJson(route(self::ROTA));
 
-        $response->assertStatus(401)
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED)
             ->assertJson([
                 'message' => 'Unauthenticated.',
             ]);
@@ -45,7 +46,7 @@ class CriarTest extends TestCase
 
         $response = $this->actingAs($this->usuario)->postJson(route(self::ROTA), $novosDadosIncorreto);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJson([
                 'errors' => [
                     'produtos.0.codigo_barras' => ['O campo produtos.0.codigo_barras não pode ser superior a 128 caracteres.'],
@@ -69,7 +70,7 @@ class CriarTest extends TestCase
 
         $response = $this->actingAs($this->usuario)->postJson(route(self::ROTA), $novosDadosIncorreto);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJson([
                 'errors' => [
                     'produtos.0.codigo_barras' => ['O campo produtos.0.codigo_barras é obrigatório.'],
@@ -94,7 +95,7 @@ class CriarTest extends TestCase
 
         $response = $this->actingAs($this->usuario)->postJson(route(self::ROTA), $novosDadosIncorreto);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJson([
                 'errors' => [
                     'produtos.0.codigo_barras' => ['O campo produtos.0.codigo_barras deve ser uma string.'],
@@ -114,7 +115,7 @@ class CriarTest extends TestCase
         ];
         $response = $this->actingAs($this->usuario)->postJson(route(self::ROTA), $novosDadosIncorreto);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJson([
                 'errors' => [
                     'produtos' => ["Um produto possui um código de barras em uso. Produto: {$produto['nome']}"],
@@ -131,7 +132,7 @@ class CriarTest extends TestCase
 
         $response = $this->actingAs($this->usuario)->postJson(route(self::ROTA), $novosDados);
 
-        $response->assertStatus(201)
+        $response->assertStatus(Response::HTTP_CREATED)
             ->assertJson([
                 'data' => [
                     [

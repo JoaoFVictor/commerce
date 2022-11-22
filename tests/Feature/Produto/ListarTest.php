@@ -5,6 +5,7 @@ namespace Tests\Feature\Produto;
 use App\Models\Estoque;
 use App\Models\Produto;
 use App\Models\Usuario;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class ListarTest extends TestCase
@@ -21,7 +22,7 @@ class ListarTest extends TestCase
     {
         $response = $this->getJson(route(self::ROTA));
 
-        $response->assertStatus(401)
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED)
             ->assertJson([
                 'message' => 'Unauthenticated.',
             ]);
@@ -34,7 +35,7 @@ class ListarTest extends TestCase
 
         $response = $this->actingAs($this->usuario)->getJson(route(self::ROTA));
 
-        $response->assertStatus(200)
+        $response->assertStatus(Response::HTTP_OK)
             ->assertJson([
                 'data' => [
                     [

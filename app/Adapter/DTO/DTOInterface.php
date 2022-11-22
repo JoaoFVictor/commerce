@@ -14,11 +14,11 @@ abstract class DTOInterface implements JsonSerializable
 
     public function get(string $propriedade): mixed
     {
-        $getter = 'get' . ucfirst($propriedade);
+        $getter = 'get'.ucfirst($propriedade);
         if (method_exists($this, $getter)) {
             return $this->{$getter}();
         }
-        if (!property_exists($this, $propriedade)) {
+        if (! property_exists($this, $propriedade)) {
             throw new InvalidArgumentException(sprintf(
                 "A propriedade '%s' não existe em '%s' Classe de DTO",
                 $propriedade,

@@ -21,7 +21,7 @@ class BuscarTest extends TestCase
     {
         $response = $this->getJson(route(self::ROTA));
 
-        $response->assertStatus(401)
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED)
             ->assertJsonStructure([
                 'message',
             ]);
@@ -31,7 +31,7 @@ class BuscarTest extends TestCase
     {
         $response = $this->actingAs($this->usuario)->getJson(route(self::ROTA));
 
-        $response->assertStatus(200)
+        $response->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure([
                 'data' => [
                     'id',

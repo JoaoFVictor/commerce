@@ -19,7 +19,7 @@ class ListarNomeProdutoAction
         $filtros = [
             'nome' => $nome,
         ];
-        $quantidade = array_key_exists('has_estoque', $dados) ? 0 : null;
+        $quantidade = isset($dados['has_estoque']) ? 0 : null;
 
         return $this->produtoRepository->listar($usuarioId, $filtros, $quantidade);
     }

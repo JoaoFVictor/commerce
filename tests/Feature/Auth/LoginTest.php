@@ -3,6 +3,7 @@
 namespace Tests\Feature\Auth;
 
 use App\Models\Usuario;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
@@ -19,7 +20,7 @@ class LoginTest extends TestCase
 
         $response = $this->postJson(route(self::ROTA), $novosDados);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonStructure([
                 'message',
                 'errors' => [
@@ -38,7 +39,7 @@ class LoginTest extends TestCase
 
         $response = $this->postJson(route(self::ROTA), $novosDados);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonStructure([
                 'message',
                 'errors' => [
@@ -57,7 +58,7 @@ class LoginTest extends TestCase
 
         $response = $this->postJson(route(self::ROTA), $novosDados);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonStructure([
                 'message',
                 'errors' => [
@@ -78,7 +79,7 @@ class LoginTest extends TestCase
 
         $response = $this->postJson(route(self::ROTA), $novosDados);
 
-        $response->assertStatus(200)
+        $response->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure([
                 'token',
             ]);

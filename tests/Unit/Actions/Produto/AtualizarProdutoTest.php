@@ -5,7 +5,6 @@ namespace Tests\Unit\Actions\Produto;
 use App\Actions\Produto\AtualizarProdutoAction;
 use App\Adapter\DTO\Estoque\EstoqueDTO;
 use App\Adapter\DTO\Produto\ProdutoDTO;
-use App\Models\Estoque;
 use App\Models\Produto;
 use App\Repository\Estoque\EstoqueRepositoryInterface;
 use App\Repository\Produto\ProdutoRepositoryInterface;

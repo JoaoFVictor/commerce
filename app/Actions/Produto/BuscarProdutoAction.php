@@ -20,10 +20,10 @@ class BuscarProdutoAction
         $usuarioId = Auth::id();
         $produto = $this->produtoRepository->buscar($produtoId);
         if (is_null($produto)) {
-            throw new NotFoundHttpException(__('Produto não encontrado!'));
+            throw new NotFoundHttpException(config('messages.product.not_found'));
         }
         if ($produto->usuario_id != $usuarioId) {
-            throw new AccessDeniedHttpException(__('Você não tem permissão nesse produto!'));
+            throw new AccessDeniedHttpException(__('Usuário sem permissão.'));
         }
 
         return $produto;

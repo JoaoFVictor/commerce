@@ -9,4 +9,12 @@ return [
     'error' => [
         'server' => 'Algo de errado não está certo. Entre em contato com o suporte!',
     ],
+
+    'product' => [
+        'not_found' => 'Produto não encontrado!',
+    ],
+
+    'user' => [
+        'without_permission' => 'Usuário sem permissão.',
+    ],
 ];

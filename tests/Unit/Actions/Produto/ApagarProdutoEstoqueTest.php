@@ -17,6 +17,7 @@ class ApagarProdutoEstoqueTest extends TestCase
         parent::setUp();
         $this->produtoRepositoryStub = $this->createMock(ProdutoRepositoryInterface::class);
     }
+
     /**
      * @test
      */

@@ -21,7 +21,7 @@ class ApagarTest extends TestCase
     {
         $response = $this->deleteJson(route(self::ROTA));
 
-        $response->assertStatus(401)
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED)
             ->assertJsonStructure([
                 'message',
             ]);
@@ -31,7 +31,7 @@ class ApagarTest extends TestCase
     {
         $response = $this->actingAs($this->usuario)->deleteJson(route(self::ROTA));
 
-        $response->assertStatus(200);
+        $response->assertStatus(Response::HTTP_OK);
 
         $this->assertDatabaseMissing('usuarios', [
             'id' => $this->usuario->id,

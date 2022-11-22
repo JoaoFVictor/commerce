@@ -3,6 +3,7 @@
 namespace Tests\Feature\Password;
 
 use App\Models\Usuario;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class ResetarSenhaLinkTest extends TestCase
@@ -18,7 +19,7 @@ class ResetarSenhaLinkTest extends TestCase
 
         $response = $this->postJson(route(self::ROTA), $novosDados);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonStructure([
                 'message',
                 'errors' => [
@@ -35,7 +36,7 @@ class ResetarSenhaLinkTest extends TestCase
 
         $response = $this->postJson(route(self::ROTA), $novosDados);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonStructure([
                 'message',
                 'errors' => [
@@ -52,7 +53,7 @@ class ResetarSenhaLinkTest extends TestCase
 
         $response = $this->postJson(route(self::ROTA), $novosDados);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonStructure([
                 'message',
                 'errors' => [
@@ -71,7 +72,7 @@ class ResetarSenhaLinkTest extends TestCase
 
         $response = $this->postJson(route(self::ROTA), $novosDados);
 
-        $response->assertStatus(200)
+        $response->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure([
                 'message',
             ]);

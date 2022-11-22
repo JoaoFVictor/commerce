@@ -8,6 +8,8 @@ use App\Models\Estoque;
 interface EstoqueRepositoryInterface
 {
     public function buscar(int $estoqueId): Estoque;
+
     public function atualizar(EstoqueDTO $estoqueDTO): void;
+
     public function criar(EstoqueDTO $estoqueDTO): Estoque;
 }

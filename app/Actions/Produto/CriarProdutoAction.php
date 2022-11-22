@@ -8,6 +8,7 @@ use App\Repository\Estoque\EstoqueRepositoryInterface;
 use App\Repository\Produto\ProdutoRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class CriarProdutoAction
@@ -45,7 +46,7 @@ class CriarProdutoAction
         });
 
         if ($erroTransacao) {
-            throw new HttpException(409, $erroTransacao);
+            throw new HttpException(Response::HTTP_CONFLICT, $erroTransacao);
         }
 
         return $produtos;

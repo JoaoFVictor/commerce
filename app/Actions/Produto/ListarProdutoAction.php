@@ -15,7 +15,7 @@ class ListarProdutoAction
 
     public function execute(array $dados): Paginator
     {
-        $quantidadeMinima = isset($dados['quantidade_minima']) ? intval($dados['quantidade_minima']) : 0;
+        $quantidadeMinima = intval($dados['quantidade_minima']) ?? 0;
         $usuarioId = Auth::id();
 
         return $this->produtoRepository->listar($usuarioId, [], $quantidadeMinima);

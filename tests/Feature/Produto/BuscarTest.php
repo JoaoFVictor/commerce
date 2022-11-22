@@ -5,6 +5,7 @@ namespace Tests\Feature\Produto;
 use App\Models\Estoque;
 use App\Models\Produto;
 use App\Models\Usuario;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class BuscarTest extends TestCase
@@ -24,7 +25,7 @@ class BuscarTest extends TestCase
 
         $response = $this->getJson(route(self::ROTA, $produto->getKey()));
 
-        $response->assertStatus(401)
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED)
             ->assertJson([
                 'message' => 'Unauthenticated.',
             ]);
@@ -39,7 +40,7 @@ class BuscarTest extends TestCase
 
         $response = $this->actingAs($this->usuario)->getJson(route(self::ROTA, $idInvalido));
 
-        $response->assertStatus(404)
+        $response->assertStatus(Response::HTTP_NOT_FOUND)
             ->assertJson([
                 'message' => 'Produto não encontrado!',
             ]);
@@ -52,7 +53,7 @@ class BuscarTest extends TestCase
 
         $response = $this->actingAs($this->usuario)->getJson(route(self::ROTA, $produto->getKey()));
 
-        $response->assertStatus(200)
+        $response->assertStatus(Response::HTTP_OK)
             ->assertJson([
                 'data' => [
                     'codigo_barras' => $produto->codigo_barras,

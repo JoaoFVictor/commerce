@@ -38,7 +38,7 @@ class EstoqueRepositoryEloquent implements EstoqueRepositoryInterface
         ];
 
         return array_filter($novosDados, function ($valor) {
-            return !is_null($valor);
+            return ! is_null($valor);
         });
     }
 }

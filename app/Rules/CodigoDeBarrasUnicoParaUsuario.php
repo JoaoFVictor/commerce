@@ -44,7 +44,7 @@ class CodigoDeBarrasUnicoParaUsuario implements Rule
     {
         $usuarioLogado = auth('sanctum')->user();
 
-        return !($this->falhaCodigoBarrasUnicoDoProduto($usuarioLogado, $valor) || $this->falhaCodigoBarrasUnicoDaListaProduto($usuarioLogado, $valor));
+        return ! ($this->falhaCodigoBarrasUnicoDoProduto($usuarioLogado, $valor) || $this->falhaCodigoBarrasUnicoDaListaProduto($usuarioLogado, $valor));
     }
 
     public function message(): string

@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Produto;
 
 use App\Actions\Produto\ApagarProdutoAction;
 use App\Actions\Produto\AtualizarProdutoAction;
-use App\Actions\Produto\ListarNomeProdutoAction;
 use App\Actions\Produto\BuscarProdutoAction;
 use App\Actions\Produto\BuscarValorTotalProdutoAction;
 use App\Actions\Produto\CriarProdutoAction;
 use App\Actions\Produto\ListarCodigoBarrasProdutoAction;
+use App\Actions\Produto\ListarNomeProdutoAction;
 use App\Actions\Produto\ListarProdutoAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Produto\AtualizarProduto;
@@ -55,7 +55,7 @@ class ProdutoController extends Controller
 
             return ProdutosResource::collection($produtos);
         } catch (Exception $ex) {
-            Log::critical('Controller' . self::class, ['exception' => $ex->getMessage()]);
+            Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
 
             return Response::json(['message' => config('messages.error.server')], HttpFoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -75,9 +75,9 @@ class ProdutoController extends Controller
         try {
             $produtos = $this->criarProdutoAction->execute($request->validated());
 
-            return (ProdutosResource::collection($produtos))->response()->setStatusCode(HttpFoundationResponse::HTTP_CREATED);
+            return ProdutosResource::collection($produtos)->response()->setStatusCode(HttpFoundationResponse::HTTP_CREATED);
         } catch (Exception $ex) {
-            Log::critical('Controller' . self::class, ['exception' => $ex->getMessage()]);
+            Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
 
             return Response::json(['message' => config('messages.error.server')], HttpFoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -92,7 +92,7 @@ class ProdutoController extends Controller
      * @urlParam id integer required O id do registro.
      * @responseFile ApiResposta/ProdutoController/Buscar.json
      * @response 404 {"message": "Produto não encontrado!"}
-     * @response 403 {"message": "Você não tem permissão nesse produto!"}
+     * @response 403 {"message": "Usuário sem permissão."}
      */
     public function show(int $produto): ProdutosResource|JsonResponse
     {
@@ -103,7 +103,7 @@ class ProdutoController extends Controller
         } catch (NotFoundHttpException | AccessDeniedHttpException $ex) {
             return Response::json(['message' => $ex->getMessage()], $ex->getStatusCode());
         } catch (Exception $ex) {
-            Log::critical('Controller' . self::class, ['exception' => $ex->getMessage()]);
+            Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
 
             return Response::json(['message' => config('messages.error.server')], HttpFoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -124,7 +124,7 @@ class ProdutoController extends Controller
 
             return ProdutosResource::collection($produto);
         } catch (Exception $ex) {
-            Log::critical('Controller' . self::class, ['exception' => $ex->getMessage()]);
+            Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
 
             return Response::json(['message' => config('messages.error.server')], HttpFoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -145,7 +145,7 @@ class ProdutoController extends Controller
 
             return ProdutosResource::collection($produto);
         } catch (Exception $ex) {
-            Log::critical('Controller' . self::class, ['exception' => $ex->getMessage()]);
+            Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
 
             return Response::json(['message' => config('messages.error.server')], HttpFoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -161,7 +161,7 @@ class ProdutoController extends Controller
      * @responseFile ApiResposta/ProdutoController/Atualizar.json
      * @responseFile 422 ApiResposta/ProdutoController/ValidacaoAtualizar.json
      * @response 404 {"message": "Produto não encontrado!"}
-     * @response 403 {"message": "Você não tem permissão nesse produto!"}
+     * @response 403 {"message": "Usuário sem permissão."}
      */
     public function update(AtualizarProduto $request, int $produto): ProdutosResource|JsonResponse
     {
@@ -172,7 +172,7 @@ class ProdutoController extends Controller
         } catch (NotFoundHttpException | AccessDeniedHttpException $ex) {
             return Response::json(['message' => $ex->getMessage()], $ex->getStatusCode());
         } catch (Exception $ex) {
-            Log::critical('Controller' . self::class, ['exception' => $ex->getMessage()]);
+            Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
 
             return Response::json(['message' => config('messages.error.server')], HttpFoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -187,7 +187,7 @@ class ProdutoController extends Controller
      * @urlParam id integer required O id do registro.
      * @response 200 {"message": "OK"}
      * @response 404 {"message": "Produto não encontrado!"}
-     * @response 403 {"message": "Você não tem permissão nesse produto!"}
+     * @response 403 {"message": "Usuário sem permissão."}
      */
     public function destroy(int $produto): JsonResponse
     {
@@ -198,7 +198,8 @@ class ProdutoController extends Controller
         } catch (NotFoundHttpException | AccessDeniedHttpException $ex) {
             return Response::json(['message' => $ex->getMessage()], $ex->getStatusCode());
         } catch (Exception $ex) {
-            Log::critical('Controller' . self::class, ['exception' => $ex->getMessage()]);
+            Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
+
             return Response::json(['message' => config('messages.error.server')], HttpFoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -218,7 +219,7 @@ class ProdutoController extends Controller
 
             return Response::json(['valor_total' => $valorTotal]);
         } catch (Exception $ex) {
-            Log::critical('Controller' . self::class, ['exception' => $ex->getMessage()]);
+            Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
 
             return Response::json(['message' => config('messages.error.server')], HttpFoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
         }

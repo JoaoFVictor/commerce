@@ -4,6 +4,7 @@ namespace Tests\Feature\Cliente;
 
 use App\Models\Cliente;
 use App\Models\Usuario;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class DetalharTest extends TestCase
@@ -19,7 +20,7 @@ class DetalharTest extends TestCase
 
         $response = $this->getJson(route(self::ROTA, $clienteUm->id));
 
-        $response->assertStatus(401)
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED)
             ->assertJsonStructure([
                 'message',
             ]);
@@ -32,7 +33,7 @@ class DetalharTest extends TestCase
 
         $response = $this->actingAs($usuario)->getJson(route(self::ROTA, $idInvalido));
 
-        $response->assertStatus(404)
+        $response->assertStatus(Response::HTTP_NOT_FOUND)
             ->assertJsonStructure([
                 'message',
             ]);
@@ -45,7 +46,7 @@ class DetalharTest extends TestCase
 
         $response = $this->actingAs($usuario)->getJson(route(self::ROTA, $clienteNovo->id));
 
-        $response->assertStatus(200)
+        $response->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure([
                 'data' => [
                     'id',

@@ -5,6 +5,7 @@ namespace Tests\Feature\Produto;
 use App\Models\Estoque;
 use App\Models\Produto;
 use App\Models\Usuario;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class DeletarTest extends TestCase
@@ -19,14 +20,13 @@ class DeletarTest extends TestCase
         $this->produto = Produto::factory()->create(['usuario_id' => $this->usuario->getKey()]);
     }
 
-
     public function testFalhaUsuarioNaoLogado()
     {
         Estoque::factory()->create(['produto_id' => $this->produto->getKey()]);
 
         $response = $this->deleteJson(route(self::ROTA, $this->produto->getKey()));
 
-        $response->assertStatus(401)
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED)
             ->assertJson([
                 'message' => 'Unauthenticated.',
             ]);
@@ -38,7 +38,7 @@ class DeletarTest extends TestCase
 
         $response = $this->actingAs($this->usuario2)->deleteJson(route(self::ROTA, $this->produto->getKey()));
 
-        $response->assertStatus(403)
+        $response->assertStatus(Response::HTTP_FORBIDDEN)
             ->assertJson([
                 'message' => 'Você não tem permissão nesse produto!',
             ]);
@@ -52,7 +52,7 @@ class DeletarTest extends TestCase
 
         $response = $this->actingAs($this->usuario)->deleteJson(route(self::ROTA, $idInvalido));
 
-        $response->assertStatus(404)
+        $response->assertStatus(Response::HTTP_NOT_FOUND)
             ->assertJson([
                 'message' => 'Produto não encontrado!',
             ]);
@@ -64,7 +64,7 @@ class DeletarTest extends TestCase
 
         $response = $this->actingAs($this->usuario)->deleteJson(route(self::ROTA, $this->produto->getKey()));
 
-        $response->assertStatus(200)
+        $response->assertStatus(Response::HTTP_OK)
             ->assertJson([
                 'message' => 'Produto excluído com sucesso.',
             ]);

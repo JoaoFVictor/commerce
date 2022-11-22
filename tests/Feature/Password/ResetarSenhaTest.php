@@ -4,6 +4,7 @@ namespace Tests\Feature\Password;
 
 use App\Actions\Usuario\GerarTokenSenhaUsuarioAction;
 use App\Models\Usuario;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class ResetarSenhaTest extends TestCase
@@ -22,7 +23,7 @@ class ResetarSenhaTest extends TestCase
 
         $response = $this->postJson(route(self::ROTA), $novosDados);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonStructure([
                 'message',
                 'errors' => [
@@ -44,7 +45,7 @@ class ResetarSenhaTest extends TestCase
 
         $response = $this->postJson(route(self::ROTA), $novosDados);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonStructure([
                 'message',
                 'errors' => [
@@ -67,7 +68,7 @@ class ResetarSenhaTest extends TestCase
 
         $response = $this->postJson(route(self::ROTA), $novosDados);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonStructure([
                 'message',
                 'errors' => [
@@ -90,7 +91,7 @@ class ResetarSenhaTest extends TestCase
 
         $response = $this->postJson(route(self::ROTA), $novosDados);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonStructure([
                 'message',
                 'errors' => [
@@ -111,7 +112,7 @@ class ResetarSenhaTest extends TestCase
 
         $response = $this->postJson(route(self::ROTA), $novosDados);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonStructure([
                 'message',
                 'errors' => [
@@ -134,6 +135,6 @@ class ResetarSenhaTest extends TestCase
 
         $response = $this->postJson(route(self::ROTA), $novosDados);
 
-        $response->assertStatus(200);
+        $response->assertStatus(Response::HTTP_OK);
     }
 }

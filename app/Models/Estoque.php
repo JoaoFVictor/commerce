@@ -10,11 +10,14 @@ class Estoque extends Model
     use HasFactory;
 
     protected $table = 'estoque';
+
     protected $primaryKey = 'id';
+
     protected $fillable = [
         'quantidade',
         'produto_id',
     ];
+
     protected $casts = [
         'produto_id' => 'int',
     ];

@@ -10,7 +10,7 @@ class UsuariosResource extends JsonResource
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
-    public function toArray($request): array: array
+    public function toArray($request): array
     {
         return [
             'id' => $this->id,

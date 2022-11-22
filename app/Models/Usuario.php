@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -18,7 +19,9 @@ class Usuario extends Authenticatable implements MustVerifyEmail
     use SoftDeletes;
 
     protected $table = 'usuarios';
+
     protected $primaryKey = 'id';
+
     protected $fillable = [
         'nome',
         'email',
@@ -29,10 +32,12 @@ class Usuario extends Authenticatable implements MustVerifyEmail
         'imagem_id',
         'plano',
     ];
+
     protected $hidden = [
         'senha',
         'codigo_confirmacao',
     ];
+
     protected $casts = [
         'status' => 'boolean',
     ];
@@ -52,7 +57,7 @@ class Usuario extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(Imagem::class);
     }
 
-    public function produto()
+    public function produto(): HasMany
     {
         return $this->hasMany(Produto::class);
     }

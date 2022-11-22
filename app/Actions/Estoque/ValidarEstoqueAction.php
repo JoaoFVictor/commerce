@@ -3,6 +3,7 @@
 namespace App\Actions\Estoque;
 
 use App\Repository\Produto\ProdutoRepositoryInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ValidarEstoqueAction
@@ -16,7 +17,7 @@ class ValidarEstoqueAction
     {
         if ($removerEstoque && $quantidadeEstoque < $produtoDaTransacao['quantidade']) {
             $produtoInvalido = $this->produtoRepository->buscar($produtoDaTransacao['id']);
-            throw new HttpException(409, "Quantidade de produto inválido, a quantidade. Produto : {$produtoInvalido->nome}");
+            throw new HttpException(Response::HTTP_CONFLICT, "Quantidade de produto inválido, a quantidade. Produto : {$produtoInvalido->nome}");
         }
     }
 }
