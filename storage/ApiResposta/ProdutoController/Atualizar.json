@@ -1,0 +1,14 @@
+{
+    "data": {
+        "id": 1465,
+        "nome": "bbb",
+        "codigo_barras": "23",
+        "marca": "22",
+        "preco_venda": 22,
+        "preco_custo": 22,
+        "validade": "12/06/2021",
+        "quantidade": 23,
+        "created_at": "2021-07-08T01:28:13.000000Z",
+        "updated_at": "2021-07-08T01:31:07.000000Z"
+    }
+}

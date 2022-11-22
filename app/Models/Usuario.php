@@ -18,9 +18,7 @@ class Usuario extends Authenticatable implements MustVerifyEmail
     use SoftDeletes;
 
     protected $table = 'usuarios';
-
     protected $primaryKey = 'id';
-
     protected $fillable = [
         'nome',
         'email',
@@ -31,12 +29,10 @@ class Usuario extends Authenticatable implements MustVerifyEmail
         'imagem_id',
         'plano',
     ];
-
     protected $hidden = [
         'senha',
         'codigo_confirmacao',
     ];
-
     protected $casts = [
         'status' => 'boolean',
     ];
@@ -54,5 +50,10 @@ class Usuario extends Authenticatable implements MustVerifyEmail
     public function imagem(): BelongsTo
     {
         return $this->belongsTo(Imagem::class);
+    }
+
+    public function produto()
+    {
+        return $this->hasMany(Produto::class);
     }
 }
