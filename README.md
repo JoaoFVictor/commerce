@@ -20,8 +20,8 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 ## 💻 Pré-requisitos
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
-* Sua maquina contem PHP com versão 8.1 ou superior e com todos as extenções necessarias para o funcionamento do laravel.
-* Sua maquina contem Composer com versão 2.0 ou superior.
+* Sua máquina contém PHP com versão 8.1 ou superior e com todas as extensões necessárias para o funcionamento do laravel.
+* Sua máquina contém Composer com versão 2.0 ou superior.
 
 ## ⚙️ Instalação
 
@@ -48,19 +48,19 @@ composer install
 
 ## ⛵ Laravel Sail
 
-O projeto utiliza o Sail para containerizar o ambiente de desenvolvimento. Para instalar utilize os seguintes comandos:
+O projeto utiliza o Sail para conteinerização o ambiente de desenvolvimento. Para instalar utilize os seguintes comandos:
 ```
 php artisan sail:install
 ```
-> Obs: O Sail irá pegar as inforamções de `username`, `password` e `database` que estão configurado no `.env`
+> Obs: O Sail irá pegar as informações de `username`, `password` e `database` que estão configurado no `.env`
 
 Para subir os containers da aplicação execute o comando:
 ```
 ./vendor/bin/sail up -d
 ```
-> Obs: Se houver alterações no arquivo `docker-compose.yml` é recomendando fazer novamente o build da aplicação, para isso, utilize `./vendor/bin/sail up -d --build`. Antes de executar o comando, certifique que nenhum container esteja rodando, caso esteja utilize o comando `./vendor/bin/sail down` para desliga-los
+> Obs: Se houver alterações no arquivo `docker-compose.yml` é recomendado fazer novamente o build da aplicação, para isso, utilize `./vendor/bin/sail up -d --build`. Antes de executar o comando, certifique que nenhum contêiner esteja rodando, caso esteja, utilize o comando `./vendor/bin/sail down` para desligá-los
 
-Para total funcionamento do projeto, é necessario dar permissões para algumas pastas, para isso é necessario entrar no container do Sail e executar alguns comandos:
+Para total funcionamento do projeto, é necessário dar permissões para algumas pastas, para isso é necessário entrar no container do Sail e executar alguns comandos:
 ```
 ./vendor/bin/sail root-shell
 chmod -R 777 storage
@@ -73,7 +73,7 @@ Após a configuração do Sail e os containers já em funcionamento, para a exec
 ./vendor/bin/sail artisan key:generate
 ```
 
-É necessario tambem criar e poupular o banco de dados, rode o comando:
+É necessário também criar e popular o banco de dados, rode o comando:
 ```
 ./vendor/bin/sail artisan migrate --seed
 ```
