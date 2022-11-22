@@ -11,7 +11,7 @@
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
 - ✅Usuário e cliente
-- ⌛Produto e estoque
+- ✅Produto e estoque
 - ⌛Notificação
 - ⌛Menu, tela
 - ⌛Imagem e carousel

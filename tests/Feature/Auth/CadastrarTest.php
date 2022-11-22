@@ -4,6 +4,7 @@ namespace Tests\Feature\Auth;
 
 use App\Models\Usuario;
 use Faker\Factory;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class CadastrarTest extends TestCase
@@ -22,7 +23,7 @@ class CadastrarTest extends TestCase
 
         $response = $this->postJson(route(self::ROTA), $novosDados);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonStructure([
                 'message',
                 'errors' => [
@@ -45,7 +46,7 @@ class CadastrarTest extends TestCase
 
         $response = $this->postJson(route(self::ROTA), $novosDados);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonStructure([
                 'message',
                 'errors' => [
@@ -69,7 +70,7 @@ class CadastrarTest extends TestCase
 
         $response = $this->postJson(route(self::ROTA), $novosDados);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonStructure([
                 'message',
                 'errors' => [
@@ -91,7 +92,7 @@ class CadastrarTest extends TestCase
 
         $response = $this->postJson(route(self::ROTA), $novosDados);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonStructure([
                 'message',
                 'errors' => [
@@ -108,7 +109,7 @@ class CadastrarTest extends TestCase
 
         $response = $this->postJson(route(self::ROTA), $novosDados);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonStructure([
                 'message',
                 'errors' => [
@@ -129,7 +130,7 @@ class CadastrarTest extends TestCase
 
         $response = $this->postJson(route(self::ROTA), $novosDados);
 
-        $response->assertStatus(201)
+        $response->assertStatus(Response::HTTP_CREATED)
             ->assertJsonStructure([
                 'message',
             ]);

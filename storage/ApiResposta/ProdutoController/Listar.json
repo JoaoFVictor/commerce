@@ -1,0 +1,41 @@
+{
+    "data": [
+        {
+            "id": 11,
+            "nome": "Smarthphone",
+            "codigo_barras": "11",
+            "marca": "Apple",
+            "preco_venda": 1499.99,
+            "preco_custo": 1299.99,
+            "validade": "29-03-2025",
+            "quantidade": 0,
+            "created_at": "2021-12-13T23:48:12.000000Z",
+            "updated_at": "2021-12-13T23:48:12.000000Z"
+        },
+        {
+            "id": 9,
+            "nome": "Computador",
+            "codigo_barras": "9",
+            "marca": "Apple",
+            "preco_venda": 1999.99,
+            "preco_custo": 1799.99,
+            "validade": "29-03-2025",
+            "quantidade": 0,
+            "created_at": "2021-12-13T23:48:12.000000Z",
+            "updated_at": "2021-12-13T23:48:12.000000Z"
+        }
+    ],
+    "links": {
+        "first": "{BASE_URL}/produtos?page=1",
+        "last": null,
+        "prev": null,
+        "next": "{BASE_URL}/produtos?page=2"
+    },
+    "meta": {
+        "current_page": 1,
+        "from": 1,
+        "path": "{BASE_URL}/produtos",
+        "per_page": 15,
+        "to": 15
+    }
+}

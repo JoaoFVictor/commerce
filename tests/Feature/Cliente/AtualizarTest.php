@@ -4,6 +4,7 @@ namespace Tests\Feature\Cliente;
 
 use App\Models\Cliente;
 use App\Models\Usuario;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class AtualizarTest extends TestCase
@@ -19,7 +20,7 @@ class AtualizarTest extends TestCase
 
         $response = $this->putJson(route(self::ROTA, $clienteUm->id));
 
-        $response->assertStatus(401)
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED)
             ->assertJsonStructure([
                 'message',
             ]);
@@ -45,7 +46,7 @@ class AtualizarTest extends TestCase
 
         $response = $this->actingAs($usuario)->putJson(route(self::ROTA, $clienteRegistrado->id), $dadosIncorretos);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonStructure([
                 'message',
                 'errors' => [
@@ -66,7 +67,7 @@ class AtualizarTest extends TestCase
 
         $response = $this->actingAs($usuario)->putJson(route(self::ROTA, $idInvalido));
 
-        $response->assertStatus(404)
+        $response->assertStatus(Response::HTTP_NOT_FOUND)
             ->assertJsonStructure([
                 'message',
             ]);
@@ -90,7 +91,7 @@ class AtualizarTest extends TestCase
 
         $response = $this->actingAs($usuario)->putJson(route(self::ROTA, $clienteRegistrado->id), $dadosIncorretos);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonStructure([
                 'message',
                 'errors' => [
@@ -121,7 +122,7 @@ class AtualizarTest extends TestCase
 
         $response = $this->actingAs($usuario)->putJson(route(self::ROTA, $clienteDois->id), $dadosIncorretos);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonStructure([
                 'message',
                 'errors' => [
@@ -143,7 +144,7 @@ class AtualizarTest extends TestCase
 
         $response = $this->actingAs($usuario)->putJson(route(self::ROTA, $cliente->id), $dadosIncorretos);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonStructure([
                 'message',
                 'errors' => [
@@ -165,7 +166,7 @@ class AtualizarTest extends TestCase
 
         $response = $this->actingAs($usuario)->putJson(route(self::ROTA, $cliente->id), $dadosIncorretos);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonStructure([
                 'message',
                 'errors' => [
@@ -181,7 +182,7 @@ class AtualizarTest extends TestCase
 
         $response = $this->actingAs($usuario)->putJson(route(self::ROTA, $clienteNovo->id));
 
-        $response->assertStatus(200)
+        $response->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure([
                 'data' => [
                     'id',

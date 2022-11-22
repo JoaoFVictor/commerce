@@ -1,0 +1,24 @@
+{
+    "errors": {
+        "produtos.*.codigo_barras": [
+            "O campo codigo barras deve ser uma string."
+        ],
+        "produtos.*.nome": [
+            "O campo nome deve ser uma string."
+        ],
+        "produtos.*.marca": [
+            "O campo marca deve ser uma string."
+        ],
+        "produtos.*.preco_venda": [
+            "O campo preco venda deve ser um número.",
+            "O campo preco venda deve ser maior ou igual a 0."
+        ],
+        "produtos.*.preco_custo": [
+            "O campo preco custo deve ser um número.",
+            "O campo preco custo deve ser maior ou igual a 0."
+        ],
+        "produtos.*.validade": [
+            "O campo validade não é uma data válida."
+        ]
+    }
+}

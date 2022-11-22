@@ -4,8 +4,12 @@ namespace App\Providers;
 
 use App\Repository\Cliente\ClienteRepositoryEloquent;
 use App\Repository\Cliente\ClienteRepositoryInterface;
+use App\Repository\Estoque\EstoqueRepositoryEloquent;
+use App\Repository\Estoque\EstoqueRepositoryInterface;
 use App\Repository\Imagem\ImagemRepositoryEloquent;
 use App\Repository\Imagem\ImagemRepositoryInterface;
+use App\Repository\Produto\ProdutoRepositoryEloquent;
+use App\Repository\Produto\ProdutoRepositoryInterface;
 use App\Repository\Usuario\UsuarioRepositoryEloquent;
 use App\Repository\Usuario\UsuarioRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
@@ -22,5 +26,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ImagemRepositoryInterface::class, ImagemRepositoryEloquent::class);
         $this->app->bind(UsuarioRepositoryInterface::class, UsuarioRepositoryEloquent::class);
         $this->app->bind(ClienteRepositoryInterface::class, ClienteRepositoryEloquent::class);
+        $this->app->bind(ProdutoRepositoryInterface::class, ProdutoRepositoryEloquent::class);
+        $this->app->bind(EstoqueRepositoryInterface::class, EstoqueRepositoryEloquent::class);
     }
 }

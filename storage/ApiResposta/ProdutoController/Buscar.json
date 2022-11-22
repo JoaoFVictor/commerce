@@ -1,0 +1,15 @@
+{
+    "data": {
+        "id": 11,
+        "nome": "Smarthphone",
+        "codigo_barras": "11",
+        "marca": "Apple",
+        "preco_venda": 1499.99,
+        "preco_custo": 1299.99,
+        "validade": "29-03-2025",
+        "quantidade": 0,
+        "created_at": "2021-12-13T23:48:12.000000Z",
+        "updated_at": "2021-12-13T23:48:12.000000Z"
+    }
+}
+

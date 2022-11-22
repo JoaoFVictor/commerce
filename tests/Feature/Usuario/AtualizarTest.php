@@ -23,7 +23,7 @@ class AtualizarTest extends TestCase
     {
         $response = $this->postJson(route(self::ROTA));
 
-        $response->assertStatus(401)
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED)
             ->assertJsonStructure([
                 'message',
             ]);
@@ -33,7 +33,7 @@ class AtualizarTest extends TestCase
     {
         $response = $this->actingAs($this->usuario)->postJson(route(self::ROTA), []);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors([
                 'nome',
                 'email',
@@ -54,7 +54,7 @@ class AtualizarTest extends TestCase
 
         $response = $this->actingAs($this->usuario)->postJson(route(self::ROTA), $dados);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors([
                 'nome',
                 'email',
@@ -74,7 +74,7 @@ class AtualizarTest extends TestCase
 
         $response = $this->actingAs($this->usuario)->postJson(route(self::ROTA), $dados);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors([
                 'nome',
                 'telefone',
@@ -95,7 +95,7 @@ class AtualizarTest extends TestCase
 
         $response = $this->actingAs($this->usuario)->postJson(route(self::ROTA), $dados);
 
-        $response->assertStatus(422)
+        $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJsonValidationErrors([
                 'email',
                 'telefone',
@@ -112,7 +112,7 @@ class AtualizarTest extends TestCase
 
         $response = $this->actingAs($this->usuario)->postJson(route(self::ROTA), $dados);
 
-        $response->assertStatus(200)
+        $response->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure([
                 'data' => [
                     'id',

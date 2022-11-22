@@ -4,6 +4,7 @@ namespace Tests\Feature\Cliente;
 
 use App\Models\Cliente;
 use App\Models\Usuario;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class ApagarTest extends TestCase
@@ -19,7 +20,7 @@ class ApagarTest extends TestCase
 
         $response = $this->deleteJson(route(self::ROTA, $clienteUm->id));
 
-        $response->assertStatus(401)
+        $response->assertStatus(Response::HTTP_UNAUTHORIZED)
             ->assertJsonStructure([
                 'message',
             ]);
@@ -32,7 +33,7 @@ class ApagarTest extends TestCase
 
         $response = $this->actingAs($usuario)->deleteJson(route(self::ROTA, $idInvalido));
 
-        $response->assertStatus(404)
+        $response->assertStatus(Response::HTTP_NOT_FOUND)
             ->assertJsonStructure([
                 'message',
                 'exception',
@@ -49,7 +50,7 @@ class ApagarTest extends TestCase
 
         $response = $this->actingAs($usuario)->deleteJson(route(self::ROTA, $clienteNovo->id));
 
-        $response->assertStatus(200)
+        $response->assertStatus(Response::HTTP_OK)
             ->assertJsonStructure([
                 'message',
             ]);
