@@ -1,57 +1,108 @@
-## About Laravel
+# Commerce
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<p align="center">
+  <img src="https://cdn.pixabay.com/photo/2016/06/12/09/08/iphone-1451614_960_720.png" width=300px>
+</p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+> O presente projeto é uma API para um comércio desenvolvida com laravel utilizando `service`, `action` e `repository`. A API contempla toda a parte de usuários, clientes, produtos, estoque, notificações e transações.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## ✨ Features
 
-## Learning Laravel
+O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- ✅Usuário e cliente
+- ⌛Produto e estoque
+- ⌛Notificação
+- ⌛Menu, tela
+- ⌛Imagem e carousel
+- ⌛Transação de produtos
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## 💻 Pré-requisitos
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Antes de começar, verifique se você atendeu aos seguintes requisitos:
+* Sua máquina contém PHP com versão 8.1 ou superior e com todas as extensões necessárias para o funcionamento do laravel.
+* Sua máquina contém Composer com versão 2.0 ou superior.
 
-## Laravel Sponsors
+## ⚙️ Instalação
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Para a instalação do projeto, siga as etapas:
 
-### Premium Partners
+Primeiramente clone o projeto:
+```
+git clone https://github.com/JoaoFVictor/commerce.git
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Acesse a pasta do projeto:
+```
+cd commerce
+```
 
-## Contributing
+Execute o comando de instalação de pacotes do composer:
+```
+composer install
+```
+Execute o comando de instalação de pacotes do composer:
+```
+composer install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## ⛵ Laravel Sail
 
-## Code of Conduct
+O projeto utiliza o Sail para conteinerização o ambiente de desenvolvimento. Para instalar utilize os seguintes comandos:
+```
+php artisan sail:install
+```
+> Obs: O Sail irá pegar as informações de `username`, `password` e `database` que estão configurado no `.env`
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Para subir os containers da aplicação execute o comando:
+```
+./vendor/bin/sail up -d
+```
+> Obs: Se houver alterações no arquivo `docker-compose.yml` é recomendado fazer novamente o build da aplicação, para isso, utilize `./vendor/bin/sail up -d --build`. Antes de executar o comando, certifique que nenhum contêiner esteja rodando, caso esteja, utilize o comando `./vendor/bin/sail down` para desligá-los
 
-## Security Vulnerabilities
+Para total funcionamento do projeto, é necessário dar permissões para algumas pastas, para isso é necessário entrar no container do Sail e executar alguns comandos:
+```
+./vendor/bin/sail root-shell
+chmod -R 777 storage
+chmod -R 777 bootstrap/cache
+```
+## 🚀 Executando projeto
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Após a configuração do Sail e os containers já em funcionamento, para a execução do projeto é necessário alguns outros passos. O primeiro deles é a criação da `APP_KEY` do Laravel, para isso execute o comando:
+```
+./vendor/bin/sail artisan key:generate
+```
 
-## License
+É necessário também criar e popular o banco de dados, rode o comando:
+```
+./vendor/bin/sail artisan migrate --seed
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🤝 Colaboradores
+
+Agradecemos às seguintes pessoas que contribuíram para este projeto:
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/JoaoFVictor">
+        <img src="https://avatars.githubusercontent.com/u/40879034?v=4" width="100px;" alt="Foto do João Victor"/><br>
+        <sub>
+          <b>João Victor</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/Chris7T">
+        <img src="https://avatars.githubusercontent.com/u/61260897?v=4" width="100px;" alt="Foto do Christian Eduardo"/><br>
+        <sub>
+          <b>Christian Eduardo</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
+## 📝 Licença
+
+Esse projeto está sob licença. Veja o arquivo [MIT Licença](https://opensource.org/licenses/MIT) para mais detalhes.
