@@ -5,6 +5,7 @@ namespace Tests\Feature\Usuario;
 use App\Models\Usuario;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class AtualizarTest extends TestCase

@@ -68,7 +68,7 @@ class AtualizarTest extends TestCase
 
         $response->assertStatus(Response::HTTP_FORBIDDEN)
             ->assertJson([
-                'message' => 'Você não tem permissão nesse produto!',
+                'message' => 'Usuário sem permissão.',
             ]);
     }
 
