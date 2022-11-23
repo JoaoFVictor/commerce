@@ -16,7 +16,7 @@ return new class extends Migration
             $table->float('preco_custo')->nullable();
             $table->float('preco_venda')->nullable();
             $table->date('validade')->nullable();
-            $table->bigInteger('usuario_id');
+            $table->unsignedBigInteger('usuario_id');
             $table->foreign('usuario_id')->references('id')->on('usuarios');
             $table->timestamps();
         });

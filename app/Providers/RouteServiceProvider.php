@@ -22,6 +22,8 @@ class RouteServiceProvider extends ServiceProvider
 
     protected $namespaceProduto = 'App\\Http\\Controllers\\Produto';
 
+    protected $namespaceNotificacao = 'App\\Http\\Controllers\\Notificacao';
+
     public function boot()
     {
         $this->configureRateLimiting();
@@ -46,6 +48,7 @@ class RouteServiceProvider extends ServiceProvider
                 Route::namespace($this->namespaceCliente)->middleware('api')->group(base_path('routes/cliente.php'));
                 Route::namespace($this->namespaceUsuario)->middleware('api')->group(base_path('routes/usuario.php'));
                 Route::namespace($this->namespaceProduto)->middleware('api')->group(base_path('routes/produto.php'));
+                Route::namespace($this->namespaceNotificacao)->middleware('api')->group(base_path('routes/notificacao.php'));
             }
         );
     }

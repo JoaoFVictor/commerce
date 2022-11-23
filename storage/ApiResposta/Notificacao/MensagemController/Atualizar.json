@@ -1,0 +1,9 @@
+{
+    "data": {
+        "id": 2,
+        "titulo": "Titulo 2 Atualizado",
+        "conteudo": "Conteudo 2 Atualizado",
+        "created_at": "2021-07-25T15:22:01.000000Z",
+        "updated_at": "2021-07-25T15:23:45.000000Z"
+    }
+}

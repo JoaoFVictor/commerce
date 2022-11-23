@@ -1,0 +1,22 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "cliente_id": 3,
+            "cliente_nome": "Jacey Wunsch",
+            "topico_id": 1,
+            "topico_nome": "Topico 1",
+            "created_at": "2021-07-27T01:46:29.000000Z",
+            "updated_at": "2021-07-28T01:43:11.000000Z"
+        },
+        {
+            "id": 3,
+            "cliente_id": 3,
+            "cliente_nome": "Richard Wunsch",
+            "topico_id": 2,
+            "topico_nome": "Topico 2",
+            "created_at": "2021-07-27T01:46:29.000000Z",
+            "updated_at": "2021-07-28T01:43:11.000000Z"
+        }
+    ]
+}

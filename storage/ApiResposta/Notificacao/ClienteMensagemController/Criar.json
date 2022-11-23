@@ -1,0 +1,13 @@
+{
+    "data": {
+        "id": 10,
+        "visualizada": true,
+        "cliente_id": 2,
+        "cliente_nome": "Dr. Duncan Hettinger Jr.",
+        "mensagem_id":1,
+        "mensagem_titulo": "Titulo 1",
+        "mensagem_conteudo": "Conteudo 1",
+        "created_at": "2021-07-25T20:29:28.000000Z",
+        "updated_at": "2021-07-25T20:29:28.000000Z"
+    }
+}

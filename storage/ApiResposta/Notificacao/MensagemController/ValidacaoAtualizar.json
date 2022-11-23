@@ -1,0 +1,21 @@
+{
+  "message": "The given data was invalid.",
+  "errors": {
+    "titulo'": [
+      "O campo titulo não pode ser superior a 100 caracteres.",
+      "O campo titulo deve ser um string."
+    ],
+    "conteudo": [
+      "O campo conteudo não pode ser superior a 100 caracteres.",
+      "O campo conteudo deve ser um string."
+    ],
+    "usuario_id'": [
+      "O campo usuario id selecionado é inválido.",
+      "O campo usuario id deve ser um número."
+    ],
+    "topico_id": [
+      "O campo topico id selecionado é inválido.",
+      "O campo topico id deve ser um número."
+    ]
+  }
+}
