@@ -3,6 +3,7 @@
 namespace Tests\Feature\Usuario;
 
 use App\Models\Usuario;
+use Symfony\Component\HttpFoundation\Response;
 use Tests\TestCase;
 
 class ApagarTest extends TestCase
