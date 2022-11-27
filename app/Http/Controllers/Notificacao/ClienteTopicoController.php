@@ -56,7 +56,7 @@ class ClienteTopicoController extends Controller
         try {
             $novo = $this->clienteTopicoRepository->criar($request->validated());
 
-            return (new ClienteTopicoResource($novo))->response()->setStatusCode(201);
+            return (new ClienteTopicoResource($novo))->response()->setStatusCode(HttpFoundationResponse::HTTP_CREATED);
         } catch (Exception $ex) {
             Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
 
@@ -124,7 +124,7 @@ class ClienteTopicoController extends Controller
         try {
             $this->clienteTopicoRepository->apagar($clienteTopico->id);
 
-            return response()->json(['message' => 'Ok.']);
+            return Response::json(['message' => 'Ok.']);
         } catch (Exception $ex) {
             Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
 

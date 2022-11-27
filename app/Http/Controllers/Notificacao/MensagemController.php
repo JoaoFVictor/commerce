@@ -56,7 +56,7 @@ class MensagemController extends Controller
         try {
             $mensagem = $this->notificacaoMensagemRepository->criar($request->validated());
 
-            return (new MensagemResource($mensagem))->response()->setStatusCode(201);
+            return (new MensagemResource($mensagem))->response()->setStatusCode(HttpFoundationResponse::HTTP_CREATED);
         } catch (Exception $ex) {
             Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
 
@@ -124,7 +124,7 @@ class MensagemController extends Controller
         try {
             $this->notificacaoMensagemRepository->apagar($mensagem->id);
 
-            return response()->json(['message' => 'Ok']);
+            return Response::json(['message' => 'Ok']);
         } catch (Exception $ex) {
             Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
 

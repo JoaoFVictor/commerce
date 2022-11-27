@@ -56,7 +56,7 @@ class ClienteController extends Controller
         try {
             $novo = $this->clienteRepository->criar($request->validated());
 
-            return (new ClienteResource($novo))->response()->setStatusCode(201);
+            return (new ClienteResource($novo))->response()->setStatusCode(HttpFoundationResponse::HTTP_CREATED);
         } catch (Exception $ex) {
             Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
 

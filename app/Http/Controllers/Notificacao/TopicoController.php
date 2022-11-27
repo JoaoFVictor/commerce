@@ -56,7 +56,7 @@ class TopicoController extends Controller
         try {
             $topico = $this->notificacaoTopicoRepository->criar($request->validated());
 
-            return (new TopicoResource($topico))->response()->setStatusCode(201);
+            return (new TopicoResource($topico))->response()->setStatusCode(HttpFoundationResponse::HTTP_CREATED);
         } catch (Exception $ex) {
             Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
 
@@ -124,7 +124,7 @@ class TopicoController extends Controller
         try {
             $this->notificacaoTopicoRepository->apagar($topico->id);
 
-            return response()->json(['message' => 'Ok']);
+            return Response::json(['message' => 'Ok']);
         } catch (Exception $ex) {
             Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
 

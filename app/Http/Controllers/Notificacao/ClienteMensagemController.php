@@ -33,7 +33,7 @@ class ClienteMensagemController extends Controller
         try {
             $novo = $this->notificacaoClienteMensagemRepository->criar($request->validated());
 
-            return (new ClienteMensagemResource($novo))->response()->setStatusCode(201);
+            return (new ClienteMensagemResource($novo))->response()->setStatusCode(HttpFoundationResponse::HTTP_CREATED);
         } catch (Exception $ex) {
             Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
 

@@ -5,6 +5,7 @@ namespace App\Models\Notificacao;
 use App\Models\Usuario;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class NotificacaoMensagem extends Model
 {
@@ -21,12 +22,12 @@ class NotificacaoMensagem extends Model
         'topico_id',
     ];
 
-    public function usuario()
+    public function usuario(): HasOne
     {
         return $this->hasOne(Usuario::class, 'id', 'usuario_id');
     }
 
-    public function topico()
+    public function topico(): HasOne
     {
         return $this->hasOne(NotificacaoTopico::class, 'id', 'topico_id');
     }
