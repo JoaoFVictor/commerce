@@ -55,7 +55,7 @@ class ProdutoController extends Controller
 
             return ProdutosResource::collection($produtos);
         } catch (Exception $ex) {
-            Log::critical('Controller' . self::class, ['exception' => $ex->getMessage()]);
+            Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
 
             return Response::json(['message' => config('messages.error.server')], HttpFoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -77,7 +77,7 @@ class ProdutoController extends Controller
 
             return ProdutosResource::collection($produtos)->response()->setStatusCode(HttpFoundationResponse::HTTP_CREATED);
         } catch (Exception $ex) {
-            Log::critical('Controller' . self::class, ['exception' => $ex->getMessage()]);
+            Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
 
             return Response::json(['message' => config('messages.error.server')], HttpFoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -103,7 +103,7 @@ class ProdutoController extends Controller
         } catch (NotFoundHttpException | AccessDeniedHttpException $ex) {
             return Response::json(['message' => $ex->getMessage()], $ex->getStatusCode());
         } catch (Exception $ex) {
-            Log::critical('Controller' . self::class, ['exception' => $ex->getMessage()]);
+            Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
 
             return Response::json(['message' => config('messages.error.server')], HttpFoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -124,7 +124,7 @@ class ProdutoController extends Controller
 
             return ProdutosResource::collection($produto);
         } catch (Exception $ex) {
-            Log::critical('Controller' . self::class, ['exception' => $ex->getMessage()]);
+            Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
 
             return Response::json(['message' => config('messages.error.server')], HttpFoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -145,7 +145,7 @@ class ProdutoController extends Controller
 
             return ProdutosResource::collection($produto);
         } catch (Exception $ex) {
-            Log::critical('Controller' . self::class, ['exception' => $ex->getMessage()]);
+            Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
 
             return Response::json(['message' => config('messages.error.server')], HttpFoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -172,7 +172,7 @@ class ProdutoController extends Controller
         } catch (NotFoundHttpException | AccessDeniedHttpException $ex) {
             return Response::json(['message' => $ex->getMessage()], $ex->getStatusCode());
         } catch (Exception $ex) {
-            Log::critical('Controller' . self::class, ['exception' => $ex->getMessage()]);
+            Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
 
             return Response::json(['message' => config('messages.error.server')], HttpFoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -198,7 +198,7 @@ class ProdutoController extends Controller
         } catch (NotFoundHttpException | AccessDeniedHttpException $ex) {
             return Response::json(['message' => $ex->getMessage()], $ex->getStatusCode());
         } catch (Exception $ex) {
-            Log::critical('Controller' . self::class, ['exception' => $ex->getMessage()]);
+            Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
 
             return Response::json(['message' => config('messages.error.server')], HttpFoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -219,7 +219,7 @@ class ProdutoController extends Controller
 
             return Response::json(['valor_total' => $valorTotal]);
         } catch (Exception $ex) {
-            Log::critical('Controller' . self::class, ['exception' => $ex->getMessage()]);
+            Log::critical('Controller'.self::class, ['exception' => $ex->getMessage()]);
 
             return Response::json(['message' => config('messages.error.server')], HttpFoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
         }

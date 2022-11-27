@@ -1,0 +1,13 @@
+{
+  "message": "The given data was invalid.",
+  "errors": {
+    "cliente_id'": [
+      "O campo cliente id selecionado é inválido.",
+      "O campo cliente id deve ser um número."
+    ],
+    "topico_id": [
+      "O campo topico id selecionado é inválido.",
+      "O campo topico id deve ser um número."
+    ]
+  }
+}

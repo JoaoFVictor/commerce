@@ -12,7 +12,7 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 
 - ✅Usuário e cliente
 - ✅Produto e estoque
-- ⌛Notificação
+- ✅Notificação
 - ⌛Menu, tela
 - ⌛Imagem e carousel
 - ⌛Transação de produtos

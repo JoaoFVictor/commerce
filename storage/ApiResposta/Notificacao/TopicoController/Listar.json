@@ -1,0 +1,10 @@
+{
+    "message": "The given data was invalid.",
+    "errors": {
+      "nome'": [
+        "O campo nome não pode ser superior a 100 caracteres.",
+        "O campo nome deve ser um string."
+      ]
+    }
+  }
+  

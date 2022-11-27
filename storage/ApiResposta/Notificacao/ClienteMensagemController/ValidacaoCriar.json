@@ -1,0 +1,19 @@
+{
+  "message": "The given data was invalid.",
+  "errors": {
+    "visualizada": [
+      "O campo visualizada é obrigatório.",
+      "O campo visualizada deve ser verdadeiro ou falso."
+    ],
+    "cliente_id'": [
+      "O campo telefone é obrigatório.",
+      "O campo cliente id selecionado é inválido.",
+      "O campo cliente id deve ser um número."
+    ],
+    "topico_id": [
+      "O campo bairro é obrigatório.",
+      "O campo mensagem id selecionado é inválido.",
+      "O campo mensagem id deve ser um número."
+    ]
+  }
+}
